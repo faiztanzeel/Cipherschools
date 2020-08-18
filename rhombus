@@ -1,0 +1,23 @@
+def rhombus(rows): 
+    n = 0
+    for e in range(1, rows + 1): 
+        for f in range (1, (rows - e) + 1): 
+            print(end = " ") 
+        while n != (2 * e - 1): 
+            print("*", end = "") 
+            n = n + 1
+        n = 0
+        print()  
+    k = 1
+    n = 1
+    for e in range(1, rows): 
+        for f in range (1, k + 1): 
+            print(end = " ") 
+        k = k + 1
+        while n <= (2 * (rows - e) - 1): 
+            print("*", end = "") 
+            n = n + 1
+        n = 1
+        print() 
+rows = 5
+rhombus(rows)
