@@ -1,0 +1,7 @@
+def pypart(n): 
+    for d in range(0, n): 
+        for e in range(0, d+1): 
+             print("* ",end="") 
+        print("\r") 
+n = 5
+pypart(n) 
