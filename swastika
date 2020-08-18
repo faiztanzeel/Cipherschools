@@ -1,0 +1,29 @@
+def swas(row,col): 
+	for e in range(row): 
+		for f in range(col): 
+			if(e < row // 2): 
+				if (f < col // 2): 
+					if (f == 0): 
+						print("*", end = "") 
+					else: 
+						print(" ", end = " ") 
+				elif (f == col // 2): 
+					print(" *", end = "") 
+				else: 
+					if (e == 0): 
+						print(" *", end = "") 
+			elif (e == row // 2): 
+				print("* ", end = "") 
+			else: 
+				if (f == col // 2 or f == col - 1): 
+					print("* ", end = "") 
+				elif (e == row - 1): 
+					if (f <= col // 2 or f == col - 1): 
+						print("* ", end = "") 
+					else: 
+						print(" ", end = " ") 
+				else: 
+					print(" ", end = " ") 
+		print() 
+row = 7; col = 7
+swas(row, col) 
