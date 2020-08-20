@@ -1,0 +1,7 @@
+binary = list(input("Input a binary number: "))
+value = 0
+for c in range(len(binary)):
+	digit = binary.pop()
+	if digit == '1':
+		value = value + pow(2, c)
+print("The decimal value of the number is", value)
