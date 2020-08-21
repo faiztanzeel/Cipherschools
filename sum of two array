@@ -1,0 +1,10 @@
+import numpy as np
+ 
+array1 = np.array([3, 2, 1])
+array2 = np.array([1, 2, 3])
+   
+print ("1st array : ", array1)  
+print ("2nd array : ", array2)  
+   
+array3 = np.add(array1, array2)  
+print ("added array : ", array3)
