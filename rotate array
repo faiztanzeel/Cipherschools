@@ -1,0 +1,6 @@
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        m = len(nums) - k%len(nums)
+        for n in range(m):
+            nums.append(nums[0])
+            nums.remove(nums[0])
