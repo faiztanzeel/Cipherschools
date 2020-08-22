@@ -1,0 +1,9 @@
+class Solution:
+    def fib(self, N: int) -> int:
+        
+        ps, p, q = 1, 0, 1
+        while ps <= N:
+            r = p + q
+            p, q = q, r
+            ps += 1
+        return p
