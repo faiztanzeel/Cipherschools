@@ -1,0 +1,7 @@
+class Solution:
+ def smallerNumbersThanCurrent(self, nums: List[int]) -> List[int]:
+  temp = sorted(nums)
+  list1 = []
+  for item in nums:
+   list1.append(bisect_left(temp,item))
+  return list1
