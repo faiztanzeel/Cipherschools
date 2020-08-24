@@ -1,0 +1,13 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        b = ['()', '{}', '[]']
+        while any([True for c in b if c in s]):
+            for c in b:
+                if c in s:
+                    n = s.find(c)
+                    s = s[:n]+s[n+2:]
+
+        if len(s) == 0:
+            return True
+        else:
+            return False
