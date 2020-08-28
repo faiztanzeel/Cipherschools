@@ -1,0 +1,20 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        roman = {
+            'I': 1,
+            'V': 5,
+            'X': 10,
+            'L': 50,
+            'C': 100,
+            'D': 500,
+            'M': 1000
+        }
+        int_val, r = 0, 0
+        while r+1 < len(s):
+            if roman[s[r]] < roman[s[r+1]]:
+                int_val -= roman[s[r]]
+            else:
+                int_val += roman[s[r]]
+            r += 1
+        int_val += roman[s[r]]
+        return int_val
