@@ -1,0 +1,23 @@
+import re
+def preprocess(string):
+    string = string.replace(' ', '')
+    nums = [int(f) for f in re.split('\+|\-|\*|\/', string)]
+    ops = re.findall('\+|\-|\/|\*', string)
+    return nums, ops
+class Solution:
+    def calculate(self, s: str) -> int:
+        nums, ops = preprocess(s)
+
+        stack = [nums[0]]
+
+        for num, op in zip(nums[1:], ops):
+            if op == '+':
+                stack.append(num)
+            if op == '-':
+                stack.append(-num)
+            if op == '*':
+                stack.append(stack.pop() * num)
+            if op == '/':
+                stack.append(int(stack.pop() / num))
+
+        return sum(stack)        
