@@ -1,0 +1,13 @@
+class Solution:
+    def lowestCommonAncestor(self, root: 'TreeNode', e: 'TreeNode', f: 'TreeNode') -> 'TreeNode':
+        if not root: return root
+        
+        if e.val == root.val or f.val == root.val:
+            return root
+        
+        if e.val > root.val and f.val > root.val:
+            return self.lowestCommonAncestor(root.right, e, f)
+        elif e.val < root.val and f.val < root.val:
+            return self.lowestCommonAncestor(root.left, e, f)
+        else:
+            return root        
