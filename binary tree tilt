@@ -1,0 +1,14 @@
+class Solution:
+	def findTilt(self, root: TreeNode) -> int:
+		b = 0
+		def treeSum(node):
+			nonlocal b
+			if not node: 
+				return 0
+			else:
+				left  = treeSum(node.left)
+				right = treeSum(node.right)
+				b += abs(left - right)
+				return node.val + left + right
+		treeSum(root)
+		return b    
