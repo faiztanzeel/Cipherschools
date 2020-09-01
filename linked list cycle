@@ -1,0 +1,12 @@
+class Solution:
+    def hasCycle(self, head: ListNode) -> bool:
+        if not head or not head.next:
+            return False
+        f = head.next
+        s = head
+        while f and f.next:
+            if f == s or f.next == s:
+                return True
+            f = f.next.next
+            s = s.next
+        return False
