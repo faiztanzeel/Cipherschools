@@ -1,0 +1,10 @@
+class Solution(object):
+    def isSymmetric(self, root):
+        if(root == None):
+            return True
+        return self.sym(root.left, root.right)
+
+    def sym(self, e, f):
+        if(e and f):
+            return e.val == f.val and self.sym(e.left, f.right) and self.sym(e.right, f.left)
+        return e is f
