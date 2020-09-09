@@ -1,0 +1,11 @@
+class Solution:
+    def invertTree(self, root: TreeNode) -> TreeNode:
+        if root is None:
+            return root
+        if root.left or root.right:
+            node=root.left
+            root.left=root.right
+            root.right=node
+            root.left=self.invertTree(root.left)
+            root.right=self.invertTree(root.right)
+        return root  
