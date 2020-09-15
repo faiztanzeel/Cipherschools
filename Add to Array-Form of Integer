@@ -1,0 +1,7 @@
+class Solution(object):
+    def addToArrayForm(self, A, K):
+        num = 0
+        for i in range(len(A)):
+            num = (num*10 + A[i])
+            
+        return [int(i) for i in str(num + K)]
