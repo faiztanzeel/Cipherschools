@@ -1,0 +1,15 @@
+def isPalindrome(self, head: ListNode) -> bool:
+        l = []
+        while(head):
+            l.append(head.val)
+            head = head.next
+        p1 = 0
+        p2 = len(l)-1
+        while(p1<p2):
+            if l[p1]!=l[p2]:
+                return False
+            else: 
+                p1+=1
+                p2-=1
+        
+        return True
