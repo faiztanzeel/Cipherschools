@@ -1,0 +1,5 @@
+class Solution:
+     import re
+     def isPalindrome(self, s: str) -> bool:
+	     clean = re.sub("[^a-z0-9]","",s.lower())
+	     return clean == clean[::-1]
