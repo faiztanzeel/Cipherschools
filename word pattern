@@ -1,0 +1,13 @@
+class Solution:
+    def wordPattern(self, pattern: str, str: str) -> bool:
+        new = str.split(' ')
+        d = {}
+        if len(set(new)) != len(set(pattern)) or len(new) != len(pattern):
+            return False
+        for i in range(len(pattern)):
+            if new[i] not in d:
+                d[new[i]] = pattern[i]
+            else:
+                if d[new[i]] != pattern[i]:
+                    return False
+        return True
