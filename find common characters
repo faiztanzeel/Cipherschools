@@ -1,0 +1,14 @@
+class Solution:
+    def commonChars(self, A: List[str]) -> List[str]:
+        a = [list(i) for i in A]
+        intersections = a[0]
+        for i in a:
+            intersections = list(set(i).intersection(set(intersections)))
+        o = intersections[:]
+        for i in intersections:
+            p = [word.count(i) for word in A]
+            p.sort()
+            p = p[0] - 1
+            for j in range(p):
+                o.append(i)
+        return o
