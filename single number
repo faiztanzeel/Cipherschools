@@ -1,0 +1,11 @@
+class Solution(object):
+    def singleNumber(self, nums):
+
+        c = collections.defaultdict(int)
+        for i in nums:
+            c[i] += 1
+            if c[i] == 2:
+                c.pop(i)
+                
+        for r in c :
+            return r
