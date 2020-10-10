@@ -1,0 +1,15 @@
+class Solution:
+   
+    def missingNumber(self, nums: List[int]) -> int:
+        
+        # O(n) for one time min and max calls
+        # Python set removal is O(1) amortized
+        
+        not_found = {i for i in range(0, len(nums) + 1)}
+        
+        for num in nums:
+            not_found.remove(num)
+            
+        (element, ) = not_found
+        
+        return element 
