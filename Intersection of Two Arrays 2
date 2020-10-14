@@ -1,0 +1,14 @@
+class Solution(object):
+    def intersect(self, nums1, nums2):
+        dicN1 = {}
+        lst = []
+        for num in nums1:
+            if num in dicN1:
+                dicN1[num] += 1
+            else:
+                dicN1[num] = 1
+        for num in nums2:
+            if num in dicN1 and dicN1[num] > 0:
+                lst.append(num)
+                dicN1[num] -= 1
+        return lst
