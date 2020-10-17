@@ -1,0 +1,16 @@
+class Solution(object):
+    def sumOfLeftLeaves(self, root):
+        if not root:
+            return 0
+        stack,result, counter = deque(), [], 0
+        stack.append(root)
+        while len(stack)>0:
+            popped = stack.popleft()
+            if popped.left and not popped.left.left and not popped.left.right:
+                counter+=popped.left.val
+            if popped.left:
+                stack.append(popped.left)
+            if popped.right:
+                stack.append(popped.right)
+            result.append(popped.val)
+        return counter
