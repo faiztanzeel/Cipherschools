@@ -1,0 +1,16 @@
+class Solution(object):
+    def toHex(self, num):
+        if num == 0:
+            return '0'
+        if num < 0:
+            num = 2**32+num
+        c = {10:'a',11:'b',12:'c',13:'d',14:'e',15:'f'}
+        res = ''
+        while num != 0:
+            r = num % 16
+            if r > 9:
+                res+=(c[num % 16])
+            else :
+                res+=(str(r))
+            num //= 16  
+        return res[::-1]
