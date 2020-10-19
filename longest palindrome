@@ -1,0 +1,10 @@
+class Solution(object):
+    def longestPalindrome(self, s):
+	
+        res, c = 0, collections.Counter(s)
+        for i in c:
+            if c[i]%2 == 0:
+                res += c[i]
+            elif (c[i]-1)%2 == 0 and c[i] > 1:  
+                res += (c[i]-1)
+        return min(res+1, len(s))
