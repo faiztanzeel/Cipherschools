@@ -1,0 +1,11 @@
+class Solution(object):
+    def numberOfBoomerangs(self, points):
+
+        res = 0
+        for i in points:
+            c = collections.defaultdict(int)
+            for j in points:
+                c[(i[0] - j[0])**2 + (i[1] - j[1])**2]+=1            
+            for k in c.values():
+                res+=k*(k-1)
+        return res
