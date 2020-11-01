@@ -1,0 +1,17 @@
+class Solution:
+    def licenseKeyFormatting(self, S: str, K: int) -> str:
+        k = 0
+        reformated_license = ""
+        
+        for key in S[::-1]:
+            if key == "-":
+                continue
+                
+            if k == K:
+                k = 0
+                reformated_license = '-' + reformated_license
+
+            reformated_license = key.upper() + reformated_license
+            k += 1
+            
+        return reformated_license
