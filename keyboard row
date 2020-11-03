@@ -1,0 +1,16 @@
+class Solution:
+    row_map = dict.fromkeys("qwertyuiopQWERTYUIOP", 1)    
+    row_map.update(dict.fromkeys("asdfghjklASDFGHJKL", 2))
+    row_map.update(dict.fromkeys("zxcvbnmZXCVBNM", 3))                
+    
+    def findWords(self, words: List[str]) -> List[str]:        
+        result = []
+        for word in  words:
+            row = Solution.row_map[word[0]]
+            for char in word:
+                if Solution.row_map[char] != row:
+                    break
+            else:
+                result.append(word)
+                
+        return result
