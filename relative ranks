@@ -1,0 +1,15 @@
+class Solution(object):
+    def findRelativeRanks(self, nums):
+
+        d,c = {},0
+        ret = ["" for i in range(len(nums))]
+        names = ["Gold Medal","Silver Medal","Bronze Medal"]
+        
+        for i in range(len(nums)):
+            d[nums[i]] = i
+        
+        for i in sorted(d.keys())[::-1]:
+            ret[d[i]] = names[c] if c<3 else str(c+1)
+            c += 1
+        
+        return ret
