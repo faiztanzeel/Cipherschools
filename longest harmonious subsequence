@@ -1,0 +1,5 @@
+class Solution:
+    def findLHS(self, nums: List[int]) -> int:
+        counts = Counter(nums)
+        lengths = [counts[n] + counts[n+1] for n in counts if n + 1 in counts]
+        return max(lengths) if lengths else 0
