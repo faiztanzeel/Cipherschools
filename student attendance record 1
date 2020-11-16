@@ -1,0 +1,14 @@
+class Solution:
+    def checkRecord(self, s: str) -> bool:
+        cnt_A = 0; d = collections.defaultdict(int)
+        for ind in range(len(s)):
+            if s[ind] =="A":
+                cnt_A+=1
+                if cnt_A>1:
+                    return False
+            if s[ind] == "L":
+                d[ind]=ind
+                if (ind-2 in d):
+                    if (ind-1 in d):
+                        return False
+        return True
