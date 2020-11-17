@@ -1,0 +1,8 @@
+class Solution:
+		def maxDepth(self, root: 'Node') -> int:
+			if root is None:
+				return 0
+			if root.children:
+				return max(map(self.maxDepth, root.children))+1
+			else:
+				return 1
