@@ -1,0 +1,8 @@
+class Solution:
+    def uniqueOccurrences(self, arr: List[int]) -> bool:
+        counts = []
+        for val, freq in collections.Counter(arr).items():
+            if freq in counts:
+                return False
+            counts.append(freq)
+        return True
