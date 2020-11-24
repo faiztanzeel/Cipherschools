@@ -1,0 +1,14 @@
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        his = []
+        
+        for op in ops:
+            if op == 'C':
+                his.pop()
+            elif op == 'D':
+                his.append(2*his[-1])
+            elif op == '+':
+                his.append(int(his[-1]) + int(his[-2]))
+            else:
+                his.append(int(op))
+        return sum(his)
