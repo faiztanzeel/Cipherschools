@@ -1,0 +1,13 @@
+class Solution:
+    def findTarget(self, root: TreeNode, k: int) -> bool:
+        self.seen=set()
+        return self.helper(root, k)
+    
+    def helper(self, root, k):
+        if not root:
+            return False
+		# inorder traversal 
+        if k-root.val in self.seen:
+            return True
+        self.seen.add(root.val)
+        return self.helper(root.left, k) or self.helper(root.right, k)
