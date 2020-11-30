@@ -1,0 +1,14 @@
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+        
+        str1 =[ch.lower() if ch not in "!?',;." else ' ' for ch in paragraph]
+        counter = Counter(''.join(str1).split())
+        
+        res, mx = '', 0
+        
+        for word in counter:
+            if word not in banned and counter[word] > mx:
+                mx = counter[word]
+                res = word
+        
+        return res
