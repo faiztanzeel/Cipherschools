@@ -1,0 +1,18 @@
+class Solution:
+    def countBinarySubstrings(self, s: str) -> int:
+        substring_count = 0
+        
+        char_count_prev = 0
+        char_count = 0        
+        for i, c in enumerate(s):
+            if i == 0 or c != s[i-1]:
+                prev_char_count = char_count
+                char_count = 1
+            else:
+                char_count += 1
+                
+            if prev_char_count > 0:
+                prev_char_count -= 1
+                substring_count += 1                
+
+        return substring_count
