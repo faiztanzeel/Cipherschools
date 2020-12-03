@@ -1,0 +1,24 @@
+class Solution:
+    def findShortestSubArray(self, nums: List[int]) -> int:
+        if not nums:
+            return 0
+        
+        index_map = {}
+        max_freq = 0
+        smallest_subarray_len = len(nums)
+		
+        for i, num in enumerate(nums):
+            if num not in index_map:
+                index_map[num] = [1, i]
+            else:
+                index_map[num][0] += 1
+            
+            if index_map[num][0] > max_freq:
+                max_freq = index_map[num][0]
+                smallest_subarray_len = i - index_map[num][1] + 1
+            
+            elif index_map[num][0] == max_freq:
+                smallest_subarray_len = min(smallest_subarray_len, 
+                                            i - index_map[num][1] + 1)
+        
+        return smallest_subarray_len
