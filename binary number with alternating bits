@@ -1,0 +1,19 @@
+class Solution:
+    def hasAlternatingBits(self, n: int) -> bool:
+        flag = False
+        
+        if n&1 == 1:
+            n = n >> 1
+        while n > 0:
+            if flag == False:
+                if n&3 == 2:
+                    flag = True
+                else:
+                    return False
+            else:
+                if n&3 == 1:
+                    flag = False
+                else:
+                    return False
+            n = n >> 1
+        return True
