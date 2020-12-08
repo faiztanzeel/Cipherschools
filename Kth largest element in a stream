@@ -1,0 +1,18 @@
+import heapq
+
+class KthLargest:
+    def __init__(self, k: int, nums: List[int]):
+        self.pq = []
+        self.K = k
+        self.add_range(nums)
+    
+    def add_range(self, nums):
+        for n in nums:
+            self.add(n)
+
+    def add(self, val: int) -> int:
+        if len(self.pq) < self.K:            
+            heapq.heappush(self.pq,     val)
+        else:
+            heapq.heappushpop(self.pq,     val)
+        return self.pq[0]
