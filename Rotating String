@@ -1,0 +1,9 @@
+class Solution:
+ def rotateString(self, A: str, B: str) -> bool:
+    ls=[]
+    for i in range(len(A)):
+        ls.append(A[i:]+A[0:i])
+    if A=="" and B=="":
+        return True
+    else:
+        return B in ls
