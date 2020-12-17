@@ -1,0 +1,14 @@
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        sym = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+        alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+        l=[]
+        for i in range(0,len(words)):
+            s = ''
+            for char in words[i]:
+                x = alpha.index(char)
+                s = s + sym[x]
+            l.append(s)
+            
+        l = set(l)
+        return len(l)
