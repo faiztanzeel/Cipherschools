@@ -1,0 +1,27 @@
+class Solution:
+    def subdomainVisits(self, cpdomains: List[str]) -> List[str]:
+        dict = {}
+        for cpd in cpdomains:
+            num, domain = cpd.split(" ")
+            count = domain.count(".")
+            
+            if domain in dict:
+                dict[domain] += int(num)
+            else:
+                dict.update({domain : int(num)})
+                
+            while count > 0:
+                idx = domain.find(".")
+                subdomain = domain[idx+1:]
+                if subdomain in dict:
+                    dict[subdomain] += int(num)
+                else:
+                    dict.update({subdomain : int(num)})
+                domain = subdomain
+                count -= 1
+             
+        ans = []
+        for dom, num in dict.items():
+            ele = str(num) + " " + str(dom)
+            ans.append(ele)
+        return ans
