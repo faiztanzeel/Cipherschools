@@ -1,0 +1,11 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        if not s or not t: return True
+        translations, used = {}, set()
+        for i, e in enumerate(s):
+            if e not in translations and t[i] not in used:
+                translations[e] = t[i]
+                used.add(t[i])
+            if translations.get(e, e) != t[i]:
+                return False
+        return True
