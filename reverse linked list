@@ -1,0 +1,16 @@
+class Solution:
+    def reverseList(self, head: ListNode) -> ListNode:
+        
+        #Define two pointers --> current and previous
+        previous, current = None, head
+        
+        #Define while loop to iterate through linked-list
+        
+        while current != None:
+            next = current.next
+            current.next = previous
+            previous = current 
+            current = next
+        
+        #Return previous
+        return previous
