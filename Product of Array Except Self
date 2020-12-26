@@ -1,0 +1,15 @@
+import operator
+from   itertools import accumulate
+
+class Solution:
+    def productExceptSelf(self, A: List[int]) -> List[int]:
+        def calculate_accumulated(A, is_prefix = True, op = operator.mul):
+            if not is_prefix:
+                A = A[::-1]
+            result = list(accumulate(A, op))
+            return [1] + result if is_prefix else result[::-1] + [1]
+        prefix = calculate_accumulated(A)
+        suffix = calculate_accumulated(A, False)	
+        for i in range(len(A)):
+            A[i] = prefix[i] * suffix[i+1]	
+        return A
