@@ -1,0 +1,23 @@
+class Solution(object):
+    def numberOfLines(self, widths, s):
+        """
+        :type widths: List[int]
+        :type s: str
+        :rtype: List[int]
+        """
+        lines = 1
+        d = {}
+        i = 97
+        pix = 0
+        
+        for w in widths:
+            d[chr(i)] = w
+            i += 1
+        
+        for st in s:
+            pix += d[st]
+            if pix > 100:
+                lines += 1
+                pix = d[st]
+
+        return [lines, pix]
