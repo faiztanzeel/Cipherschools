@@ -1,0 +1,13 @@
+class Solution:
+    def toGoatLatin(self, S: str) -> str:
+        sl = S.split(" ")
+        output=''
+        for i in range(len(sl)):
+            first= sl[i][0]
+            if(first.lower()=='a' or first.lower()=='e' or first.lower()=='i' or first.lower()=='o' or first.lower()=='u'):
+
+                output = output + sl[i] + 'ma' + ('a' * (i+1)) + ' '
+            else:
+                output = output + sl[i][1:] + first + 'ma' + ('a' * (i+1)) + ' '
+
+        return output[:len(output)-1]
