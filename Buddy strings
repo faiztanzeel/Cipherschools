@@ -1,0 +1,19 @@
+class Solution:
+    def buddyStrings(self, A: str, B: str) -> bool:
+        if len(A)<2 or len(A)!=len(B):
+            return False
+        lstA=list(A)
+        lstB=list(B)
+        common=zip(lstA,lstB)
+        for i,(x,y) in enumerate(common):
+            if x!=y:
+                try:
+                    indexing=lstA.index(y,i+1,len(lstA))
+                    lstA[i],lstA[indexing]=lstA[indexing],lstA[i]
+                except:
+                    return False
+                return lstA==lstB
+        for i in A:
+            if A.count(i)>=2:
+                return True
+        return False
