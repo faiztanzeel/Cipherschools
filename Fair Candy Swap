@@ -1,0 +1,8 @@
+class Solution:
+    def fairCandySwap(self, A: List[int], B: List[int]) -> List[int]:
+        #
+        difference = sum(A)-sum(B)
+        B = set(B)
+        for i in A:
+            if i-difference//2 in B:
+                return [i,i-difference//2]
