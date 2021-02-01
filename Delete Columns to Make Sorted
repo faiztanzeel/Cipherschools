@@ -1,0 +1,9 @@
+class Solution:  
+    def minDeletionSize(self, A: List[str]) -> int:
+        
+        D = 0
+        for vals in zip(*A):
+            valsort = tuple(sorted(vals))
+            if vals != valsort:
+                D += 1
+        return D
