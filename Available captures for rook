@@ -1,0 +1,42 @@
+class Solution:
+    def numRookCaptures(self, board: List[List[str]]) -> int:
+        rook, pawn, bishop = 'R', 'p', 'B' 
+        captures = 0
+        for row_num, row in enumerate(board):
+            if rook in row:
+                rook_row, rook_col = row_num, row.index(rook)
+                break
+        
+        #Look for captures east of rook
+        for square in board[rook_row][rook_col:]:
+            if square == bishop:
+                break
+            elif square == pawn:
+                captures += 1
+                break
+         
+        #Look for captures west of rook
+        for square in board[rook_row][:rook_col][::-1]:
+            if square == bishop:
+                break
+            elif square == pawn:
+                captures += 1
+                break
+        
+        #Look for captures south of rook
+        for square in list(zip(*board))[rook_col][rook_col:]:
+            if square == bishop:
+                break
+            elif square == pawn:
+                captures += 1
+                break
+        
+        #Look for captures north of rook
+        for square in list(zip(*board))[rook_col][:rook_col][::-1]:
+            if square == bishop:
+                break
+            elif square == pawn:
+                captures += 1
+                break
+                
+        return captures
