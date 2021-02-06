@@ -1,0 +1,17 @@
+class Solution:
+
+    def findJudge(self, N: int, trust: List[List[int]]) -> int:
+        seen = {t[0] for t in trust}
+        j = None
+        for i in range(1, N+1):
+            if i in seen:
+                continue
+            if j:
+                return -1
+            j = i
+        if not j:
+            return -1
+        for t in trust:
+            if t[0] in seen and t[1] == j:
+                seen.remove(t[0])
+        return j if not seen else -1
