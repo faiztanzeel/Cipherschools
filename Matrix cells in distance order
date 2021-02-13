@@ -1,0 +1,13 @@
+class Solution:
+    def allCellsDistOrder(self, R: int, C: int, r0: int, c0: int) -> List[List[int]]:
+        m = ([r,c] for c in range(C) for r in range(R)) # create matrix
+        dc = dict() # create dictionary
+        for c in m: # calculate difference for each coordinate in matrix
+            d = abs(r0 - c[0]) + abs(c0 - c[1])   # difference
+            if d not in dc:  # create list for each difference
+                dc[d] = []
+            dc[d].append(c)  # if coordinate has same difference, append to same list
+        a = []   
+        for k in sorted(dc.keys()): # sort dictionary difference keys, ascending order
+            a.extend(dc[k]) # extend list at given difference key
+        return a
