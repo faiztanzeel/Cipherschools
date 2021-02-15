@@ -1,0 +1,13 @@
+class Solution:
+    def sumRootToLeaf(self, root: TreeNode) -> int:
+        self.result=0
+        def helper(root,curr_sum):
+            if not root: return 
+            if not root.left and not root.right: 
+                self.result+=(curr_sum<<1)+root.val
+                return
+            helper(root.left,(curr_sum<<1)+root.val) #左移=乘以2，右移=除以2
+            helper(root.right,(curr_sum<<1)+root.val)
+
+        helper(root,0)
+        return self.result
