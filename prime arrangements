@@ -1,0 +1,11 @@
+class Solution:
+    def numPrimeArrangements(self, n: int) -> int:
+        def sieveOfEratosthenes(n):
+            primes = [1] * (n + 1)
+            for i in range(2, int(math.sqrt(n))+1):
+                if primes[i]:
+                    primes[i*i:n+1:i] = [0] * len(primes[i*i:n+1:i])            
+            return sum(primes) - 2
+        
+        count = sieveOfEratosthenes(n)        
+        return math.factorial(n-count) * math.factorial(count) % (10**9 + 7)
