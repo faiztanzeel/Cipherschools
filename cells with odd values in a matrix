@@ -1,0 +1,9 @@
+import numpy as np
+class Solution:
+    def oddCells(self, n: int, m: int, indices: List[List[int]]) -> int:
+        a = np.zeros((n,m), dtype = int)
+        for ri, ci in indices:
+            a[ri, :] += 1
+            a[:, ci] += 1
+            
+        return sum(map(lambda x: x % 2 == 1, a.flatten().tolist()))
