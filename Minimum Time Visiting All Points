@@ -1,0 +1,20 @@
+class Solution:
+    def minTimeToVisitAllPoints(self, points: List[List[int]]) -> int:
+        if len(points) <= 1:
+            return 0
+        
+        seconds = 0
+        row, col = points[0]
+        
+        for i in range(1, len(points)):
+            next_row, next_col = points[i]
+            
+            row_diff = abs(next_row - row)
+            col_diff = abs(next_col - col)
+            
+			# min(row_diff, col_diff) == move diagonal first, abs(row_diff - col_dif) == remainder of moves in straight line
+            seconds += min(row_diff, col_diff) + abs(row_diff - col_diff)
+            
+            row, col = next_row, next_col
+        
+        return seconds
