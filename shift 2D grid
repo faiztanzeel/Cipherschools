@@ -1,0 +1,10 @@
+class Solution:
+    def shiftGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
+        #
+        m = len(grid); n = len(grid[0])
+        flattern = []
+        for i in range(m):
+            flattern.extend(grid[i])
+        flattern += flattern
+        flattern = flattern[m*n-k%(m*n):2*m*n-k%(m*n)]
+        return [flattern[i*n:i*n+n] for i in range(m)]
