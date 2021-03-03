@@ -1,0 +1,13 @@
+class Solution:
+    def tictactoe(self, moves: List[List[int]]) -> str:
+        d1, d2 = set([(0,0), (1,1), (2,2)]), set([(2,0), (1,1), (0,2)])
+        h1, h2, h3 = set([(0,i) for i in range(3)]), set([(1,i) for i in range(3)]), set([(2,i) for i in range(3)])
+        v1, v2, v3 = set([(i,0) for i in range(3)]), set([(i,1) for i in range(3)]), set([(i,2) for i in range(3)])
+        w = [d1,d2,h1,h2,h3,v1,v2,v3]
+        moves = [ tuple(m) for m in moves ]
+        a, b = set(moves[0::2]), set(moves[1::2])
+        for p in w:
+            if p <= a: return "A"
+            if p <= b: return "B"
+        if len(moves) == 9 : return "Draw"
+        return "Pending"
