@@ -1,0 +1,12 @@
+class Solution:
+    def findSpecialInteger(self, arr: List[int]) -> int:
+        start_index = 0
+        required_frequency = len(arr) / 4
+        
+        while start_index < len(arr):
+            end_index = bisect.bisect(arr, arr[start_index], start_index)
+            
+            if end_index - start_index > required_frequency:
+                return arr[start_index]
+            else:
+                start_index = end_index
