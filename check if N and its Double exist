@@ -1,0 +1,7 @@
+class Solution:
+    def checkIfExist(self, arr: List[int]) -> bool:
+        if arr.count(0) >= 2:
+            return True
+        doubles = set([x*2 for x in arr]).intersection(set(arr))
+        doubles.discard(0)
+        return len(doubles) != 0
