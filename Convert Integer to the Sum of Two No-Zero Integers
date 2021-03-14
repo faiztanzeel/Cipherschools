@@ -1,0 +1,8 @@
+class Solution(object):
+    def getNoZeroIntegers(self, n):
+        i=1
+        while i<n:
+            if '0' not in str(i)+str(n-i):
+                break
+            i+=1
+        return [i,n-i]
