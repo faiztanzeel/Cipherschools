@@ -1,0 +1,15 @@
+class Solution:
+    def countLargestGroup(self, n: int) -> int:
+        #
+        helper = Counter()
+        for i in range(1,n+1):
+            digitsum = sum(int(digit) for digit in str(i))
+            helper[digitsum] += 1
+        mostcommon = helper.most_common()
+        res = 0; prev = mostcommon[0][1]
+        for i,v in mostcommon:
+            if v == prev:
+                res += 1
+            else:
+                break
+        return res
