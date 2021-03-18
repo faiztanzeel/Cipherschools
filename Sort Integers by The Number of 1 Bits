@@ -1,0 +1,7 @@
+class Solution:
+    def get_num_of_1s(self, number):
+        return (bin(number).count("1"), number)
+    
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        arr.sort(key=self.get_num_of_1s)
+        return arr
