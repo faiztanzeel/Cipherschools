@@ -1,0 +1,13 @@
+class Solution:
+    def luckyNumbers (self, matrix: List[List[int]]) -> List[int]:
+        
+        result = [min(i) for i in matrix]
+
+        temp, answer = [], []
+        for i in range(len(matrix[0])):  
+            for j in range(len(matrix)):  
+                temp.append(matrix[j][i])
+            if max(temp) in result:
+                answer.append(max(temp))
+            temp = []
+        return answer
