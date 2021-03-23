@@ -1,0 +1,16 @@
+class Solution:
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        answer = []
+        for j in range(2 ** len(nums)):
+            subset = []
+            a = ('{0:0{num}b}'.format(j, num= len(nums)))
+            for i,j in enumerate(a):
+                if int(j):
+                    subset.append(nums[i])
+            
+            subset.sort()
+            if subset not in answer:
+                answer.append(subset)
+            
+        
+        return answer
