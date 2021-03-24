@@ -1,0 +1,4 @@
+class Solution:
+  def generateTheString(self, n: int) -> str:
+    e = 1 - n & 1                     # e is 1 if even, 0 if odd
+    return 'a' * (n - e) + 'b' * e
