@@ -1,0 +1,19 @@
+class Solution:
+    def minSubsequence(self, nums: List[int]) -> List[int]:
+        counts = [0] * 101
+        for n in nums:
+            counts[n] += 1
+        
+        sum_ = sum(nums)
+        result = []
+        sub_sum = 0        
+        for n in range(100, 0, -1):
+            if sub_sum > sum_ - sub_sum:
+                break
+                
+            while counts[n] and sub_sum <= sum_ - sub_sum:
+                counts[n] -= 1
+                sub_sum += n
+                result.append(n)
+        
+        return result
