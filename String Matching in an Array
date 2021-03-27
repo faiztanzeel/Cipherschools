@@ -1,0 +1,10 @@
+class Solution:
+    def stringMatching(self, words: List[str]) -> List[str]:
+        words.sort(key=lambda x: len(x))
+        tmp = []
+        for i in range(len(words)):
+            for w in words[i:]:
+                if words[i] != w and words[i] in w:
+                    tmp.append(words[i])
+                    break
+        return tmp
