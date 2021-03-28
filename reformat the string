@@ -1,0 +1,21 @@
+class Solution:
+    def reformat(self, s: str) -> str:
+        alp = []
+        num = []
+        ans = ''
+        for i in s:
+            if i.isalpha():
+                alp.append(i)
+            else:
+                num.append(i)
+        if abs(len(alp)-len(num)) > 1:
+            return ""
+        for i, j in zip_longest(alp, num):
+            if not i:
+                ans = j + ans
+                break
+            if i:
+                ans += i
+            if j:
+                ans += j
+        return ans
