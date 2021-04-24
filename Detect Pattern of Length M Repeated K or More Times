@@ -1,0 +1,18 @@
+class Solution:
+    def containsPattern(self, arr: List[int], m: int, k: int) -> bool:
+        for i in range(len(arr)):
+			## length not long enough
+            if len(arr) - i < m * k:
+                break
+            hasPattern = True
+			# check the value index ranged (i + m,  i + m * k -1) against (i, i + m -1) correspondingly
+            for j in range(m, m*k):
+                value = arr[i + j]
+                checkAgainstValue = arr[i + j % m]
+                if value != checkAgainstValue:
+                    hasPattern = False
+                    break
+            if hasPattern:
+                return True
+        
+        return False
