@@ -1,0 +1,17 @@
+class Solution:
+    def numberOfMatches(self, n: int) -> int:
+        
+        def numberOfMatches_with_cache( n, cache ):
+            if n in cache.keys():
+                return cache[n], cache
+            a = ( n + 1 ) // 2
+            if a in cache.keys():
+                res = cache[ a ] + n // 2
+                cache[n] = res
+                return res, cache
+            else: 
+                res, cache = numberOfMatches_with_cache( a, cache )
+                cache[n] = res
+                return res + n // 2, cache
+            
+        return numberOfMatches_with_cache( n, {1:0} )[0]
