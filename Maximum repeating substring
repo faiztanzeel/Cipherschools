@@ -1,0 +1,9 @@
+class Solution:
+    def maxRepeating(self, sequence: str, word: str) -> int:
+        Count=sequence.count(word)
+        if Count==0:
+            return 0
+        for i in range(Count,0,-1):
+            
+            if word*i in sequence:
+                return i
