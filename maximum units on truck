@@ -1,0 +1,13 @@
+class Solution:
+    def maximumUnits(self, boxTypes: List[List[int]], truckSize: int) -> int:
+        boxTypes.sort(key = lambda x : -x[1])
+        count = 0
+        ans = 0
+        for box,val in boxTypes:
+            if count + box <= truckSize:
+                ans += box * val
+                count += box
+            else:
+                ans += (truckSize - count) * val
+                return ans
+        return ans
