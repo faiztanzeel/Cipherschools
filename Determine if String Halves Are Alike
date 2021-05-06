@@ -1,0 +1,13 @@
+class Solution:
+    def halvesAreAlike(self, s: str) -> bool:
+        n = len(s)
+        first_half = s[:n//2]
+        second_half = s[n//2:]
+        count = 0
+        vowels = ('a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U')
+        for c1, c2 in zip(first_half, second_half):
+            if c1 in vowels:
+                count += 1
+            if c2 in vowels:
+                count -= 1
+        return count == 0
