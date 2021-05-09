@@ -1,0 +1,14 @@
+class Solution:
+    def maxAscendingSum(self, a: List[int]) -> int:
+        count = 0
+        res = []
+        a.append(-999)
+        for i in range(0,len(a)-1):
+            print(a[i],a[i+1])
+            if(a[i]<a[i+1]):
+                count+=a[i]
+            else:
+                count+=a[i]
+                res.append(count)
+                count = 0
+        return max(res)
