@@ -1,0 +1,19 @@
+class Solution:
+    def longestNiceSubstring(self, s: str) -> str:
+        longest = ""
+        for i in range(len(s)-1):            
+            seen = set()
+            unmatched = set()            
+            for j in range(i, len(s)):
+                if s[j] not in seen:
+                    seen.add(s[j])
+
+                    if s[j].swapcase() in unmatched:
+                        unmatched.remove(s[j].swapcase())
+                    else:
+                        unmatched.add(s[j])
+                    
+                if len(unmatched) == 0 and j-i+1 > len(longest):
+                    longest = s[i:j+1]
+                    
+        return longest
