@@ -1,0 +1,13 @@
+class Solution:
+    def secondHighest(self, s: str) -> int:
+        lst = set()
+        
+        for let in s:
+            
+            if not let.isalpha():
+                lst.add(int(let))
+        
+        if len(lst) <= 1:
+            return -1
+        
+        return sorted(list(lst))[len(lst) - 2]
