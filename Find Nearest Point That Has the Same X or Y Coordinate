@@ -1,0 +1,16 @@
+class Solution:
+    def nearestValidPoint(self, x: int, y: int, points: List[List[int]]) -> int:
+        ans = -1
+        dist = 10**4
+        for n,i in enumerate(points):
+            if i[0] == x:
+                temp = abs(i[1]-y)
+                if dist > temp:
+                    dist = temp
+                    ans = n
+            elif i[1] == y:
+                temp = abs(i[0]-x)
+                if dist > temp:
+                    dist = temp
+                    ans = n
+        return -1 if ans == -1 else ans
