@@ -1,0 +1,15 @@
+class Solution:
+    def numDifferentIntegers(self, word: str) -> int:
+        nums = [] # array initialization
+        s = ""
+        for i in range(len(word)):
+            if ord(word[i]) > 47 and ord(word[i]) < 58: # check whether number or not using ascii
+                s += word[i]
+            else:
+                if(s != ""):
+                    nums.append(int(s))
+                    s = ""
+        if(s != ""):
+            nums.append(int(s))
+        return len(set(nums))
+        
