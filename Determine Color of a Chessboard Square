@@ -1,0 +1,11 @@
+class Solution:
+    def squareIsWhite(self, coordinates: str) -> bool:
+        x_odd = ['a','c','e','g']
+        x_even = ['b','d','f','h']
+        y_odd = [1,3,5,7]
+        y_even = [2,4,6,8]
+        x,y = coordinates[0],int(coordinates[1])
+        if (x in x_odd and y in y_odd) or (x in x_even and y in y_even):
+            return False
+        else:
+            return True
