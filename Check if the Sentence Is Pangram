@@ -1,0 +1,15 @@
+class Solution:
+    def checkIfPangram(self, sentence: str) -> bool:
+        
+       
+        
+        f='abcdefghijklmnopqrstuvwxyz'
+        
+        u={}
+        for j in f:
+            u[j]=0
+            
+        for k in sentence:
+            u[k]=1
+            
+        return sum(u.values())==26
