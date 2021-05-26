@@ -1,0 +1,11 @@
+class Solution:
+	def getMinDistance(self, nums: List[int], target: int, start: int) -> int:
+		x=[]
+		y=float("inf")
+		for i in range(len(nums)):
+			if nums[i]==target:
+				x.append(i)
+		for i in x:
+			if abs(i-start)<y:
+				y=abs(i-start)
+		return(y)
