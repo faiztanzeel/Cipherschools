@@ -1,0 +1,8 @@
+class Solution:
+    def replaceDigits(self, s: str) -> str:
+        chars = [chr(num) for num in range(97,123)]
+        r = ""
+        for i in range(0, len(s), 2):
+            if i+1 >= len(s): r += s[i]; continue
+            r += s[i] + chars[chars.index(s[i]) + int(s[i+1])]
+        return r
