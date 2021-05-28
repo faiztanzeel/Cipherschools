@@ -1,0 +1,12 @@
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        n = len(nums)
+        res = 0
+        for i in range(1,2**n):
+            x = bin(i)[2:].zfill(n)
+            z = 0
+            for j,k in enumerate(x):
+                if k == '1':
+                    z = z ^ int(nums[j])
+            res += z
+        return res
