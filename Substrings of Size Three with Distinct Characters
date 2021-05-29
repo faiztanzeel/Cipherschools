@@ -1,0 +1,8 @@
+class Solution:
+    def countGoodSubstrings(self, s: str) -> int:
+        cnt = 0 #to count the distinct character substring of length 3
+        for i in range(len(s)-2):
+            subStr = s[i:i+3] #compute the substring
+            if len(set(subStr)) == 3: #if set of subStr length is equal to 3 then increment cnt by 1
+                cnt += 1
+        return cnt
