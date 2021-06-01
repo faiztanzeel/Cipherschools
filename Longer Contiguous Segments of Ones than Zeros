@@ -1,0 +1,16 @@
+class Solution:
+    def checkZeroOnes(self, s: str) -> bool:
+        cntOne,cntZero = 0,0
+        maxOne,maxZero = 0,0
+        for i in s:
+            if i == '0':
+                cntZero += 1
+                cntOne = 0
+                if maxZero < cntZero:
+                    maxZero = cntZero
+            else:
+                cntOne += 1
+                cntZero = 0
+                if maxOne < cntOne:
+                    maxOne = cntOne
+        return maxOne > maxZero
