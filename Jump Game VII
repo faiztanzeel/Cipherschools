@@ -1,0 +1,26 @@
+class Solution:
+    def canReach(self, s: str, minJump: int, maxJump: int) -> bool:
+        
+        n=len(s)
+        
+        queue=[0]
+        
+        visited=set([0])
+        
+        mx=0
+        while queue:
+            node=queue.pop(0)
+            
+            if node==n-1:
+                return True
+            
+            if node<0 and node>=n:
+                continue
+            
+            for i in range(max(mx+1,node+minJump),min(node + maxJump, n - 1)+1):
+                if s[i]=='0' and i not in visited:
+                    queue.append(i)
+                    visited.add(i)
+            mx = max(mx, node + maxJump)
+        
+        return False
