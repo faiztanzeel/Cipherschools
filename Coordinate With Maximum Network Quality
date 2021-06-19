@@ -1,0 +1,16 @@
+class Solution:
+    def bestCoordinate(self, towers, radius: int):
+        x_max = y_max = 0
+        for x, y, q in towers:
+            x_max = max(x_max, x)
+            y_max = max(y_max, y)
+        points = []
+        for x in range(x_max + 1):
+            for y in range(y_max + 1):
+                quality = 0
+                for xt, yt, q in towers:
+                    distance = pow(pow(xt - x, 2) + pow(yt - y, 2), 0.5)
+                    if distance <= radius:
+                        quality += int(q / (1 + distance))
+                points.append([x, y, quality])
+        return max(points, key=lambda lst: lst[2])[:2] if points else [0, 0]
