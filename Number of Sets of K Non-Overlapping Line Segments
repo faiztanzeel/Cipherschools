@@ -1,0 +1,22 @@
+from functools import lru_cache
+class Solution:
+    def numberOfSets(self, n: int, k: int) -> int:
+        mod = 10**9 + 7
+        @lru_cache(maxsize=None)
+        def numways(started, i, k):
+            if k == 0:
+                return 1
+            if started and i == (n-1) and k == 1:
+                return 1
+            if i == (n-1):
+                return 0
+            total = 0
+            if started:
+                total += numways(False, i, k-1)
+                total += numways(True, i+1, k)
+            else:
+                total += numways(False, i+1, k)
+                total += numways(True, i+1, k)
+            total = total % mod
+            return total
+        return numways(False, 0, k)
