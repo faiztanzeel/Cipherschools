@@ -1,0 +1,34 @@
+class Solution:
+    def convert(self, s: str, numRows: int) -> str:
+        ls = [""] * numRows
+        if len(s) > 2 and numRows > 1 and len(s) > numRows:
+            start = 0
+            flag = 0 
+            '''
+            flag is used to keep the track of the pattern
+            flag = 0 implies that element has to be added in list from left to right
+            flag = 1 implies that element has to be added in list from right to left
+            '''
+            for i in s:
+                if start < numRows and flag == 0:
+                    ls[start] += i
+                    start += 1
+                    
+                    if start == numRows:
+                        flag = 1
+                        start -= 2
+                
+                else:
+                    ls[start] += i
+                    start -= 1
+                    
+                    if start == -1:
+                        flag = 0
+                        start = 1
+                        
+            # join all the string in the list
+            substr = "".join(ls)
+            return substr
+                
+        else:
+            return s
