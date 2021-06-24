@@ -1,0 +1,27 @@
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        temp1 = ""
+        temp2 = ""
+        node = ListNode(0)
+        node_x = node
+        while l1:
+            temp1 += str(l1.val)
+            l1 = l1.next
+        while l2:
+            temp2 += str(l2.val)
+            l2 = l2.next
+        temp1 = int(temp1[::-1])
+        temp2 = int(temp2[::-1])
+       
+        temp = temp1+temp2
+        print(temp)
+        if temp == 0:
+            return ListNode(0)
+        while temp > 0 :
+            x = temp % 10
+            node1 = ListNode(x)
+            node.next = node1
+            node = node.next
+            temp = temp//10
+            
+        return node_x.next
