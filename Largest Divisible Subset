@@ -1,0 +1,11 @@
+class Solution:
+    def largestDivisibleSubset(self, nums: List[int]) -> List[int]:
+        n = len(nums)
+        G = defaultdict(set)
+        nums.sort()
+        for i, x in enumerate(nums):
+            for j in range(i + 1, n):
+                if nums[j] % x == 0: G[x].add(nums[j])
+        @lru_cache(None)
+        def dfs(i): return [i] + max((dfs(j) for j in G[i]), key = lambda x:len(x)) if G[i] else [i]
+        return max((dfs(i) for i in nums), key = lambda x: len(x))
