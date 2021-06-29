@@ -1,0 +1,12 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        if n == 1:
+            return ["()"]
+
+        ans_set = set()
+        for sol in self.generateParenthesis(n-1):
+            ans_set.add('(' + sol + ')') 
+            for idx in range(2*n-1):
+                ans_set.add(sol[:idx] + "()" + sol[idx:])
+                    
+        return list(ans_set)
