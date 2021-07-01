@@ -1,0 +1,20 @@
+class Solution:
+	def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+		temp=head
+		a=0
+		while temp:
+			a=a+1
+			temp=temp.next
+		b=a-(n-1)
+		i=0
+		dummy=ListNode(0)
+		curr=dummy
+		while head:
+			i=i+1
+			if i==b:
+				pass
+			else:
+				curr.next=ListNode(head.val)
+				curr=curr.next
+			head=head.next
+		return(dummy.next)
