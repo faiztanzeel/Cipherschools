@@ -1,0 +1,22 @@
+class Solution:
+
+    def search(self, nums: List[int], target: int) -> int:
+        self.ans = -1
+
+        def search2(nums: List[int], target: int, l: int, r: int):
+            if nums[l] > nums[r]: # rotated status
+                search2(nums, target, l, (l + r) // 2)
+                search2(nums, target, (l + r) // 2 + 1, r)
+            elif nums[l] > target or nums[r] < target: #impossible to find the target
+                return
+            elif nums[(l + r) // 2] < target:
+                search2(nums, target, (l + r) // 2 + 1, r)
+            elif nums[(l + r) // 2] > target:
+                search2(nums, target, l, (l + r) // 2 - 1)
+            elif nums[(l + r) // 2] == target:
+                self.ans = (l + r) // 2
+            elif l > r:
+                return
+
+        search2(nums, target, 0, len(nums) - 1)
+        return self.ans
