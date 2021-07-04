@@ -1,0 +1,30 @@
+class Solution:
+    def __init__(self):
+        self.ans = []
+        
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        
+        def helper(candidates,target,tmp1):
+            tmp = tmp1.copy() 
+
+            if target ==0:
+                tmp1.sort()
+                self.ans.append(tmp1)
+
+            for candidate in candidates:
+                if candidate <= target:
+                    tmp.append(candidate) 
+                    tmp2 = tmp.copy()
+                    helper(candidates,target-candidate,tmp2) 
+                    tmp.pop()
+                else:
+                    continue
+        
+        
+        store = []
+        helper(candidates,target,store) 
+        
+        b_set = set(map(tuple,self.ans))  #need to convert the inner lists to tuples so they are hashable
+        b = map(list,b_set)
+        
+        return b 
