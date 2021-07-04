@@ -1,0 +1,15 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        self.ans=[]
+        ds=[]
+        self.solve(0,n,k,ds)
+        return self.ans
+    def solve(self,idx,n,k,ds):
+        if len(ds)==k:
+            self.ans.append(ds[:])
+            return
+        for i in range(idx,n):
+            ds.append(i+1)
+            self.solve(i+1,n,k,ds)
+            ds.pop()
+        return 
