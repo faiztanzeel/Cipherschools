@@ -1,0 +1,11 @@
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        
+        outval = int(dividend / divisor)
+        
+        if outval > ((2)**31)-1:
+            outval = ((2)**31)-1
+        elif outval < ((-2)**31):
+            outval = ((-2)**31)
+        
+        return outval
