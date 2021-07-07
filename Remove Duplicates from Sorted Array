@@ -1,0 +1,12 @@
+class Solution:
+    def removeDuplicates(self, arr: List[int]) -> int:
+        c=i=j=0
+        while (len(arr)>i):
+            rko=arr[i]
+            while i<(len(arr)-1) and rko==arr[i+1]:
+                i+=1
+            arr[j]=rko
+            j+=1
+            i+=1
+            c+=1
+        return c
