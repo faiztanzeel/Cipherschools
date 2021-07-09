@@ -1,0 +1,13 @@
+class Solution:
+    def readBinaryWatch(self, turnedOn: int) -> List[str]:
+        ans = []
+        for i in range(1024):
+            if(bin(i).count('1')==turnedOn):
+                item = bin(i)[2:].rjust(10,'0')
+                hrs = int(item[:4],2)
+                mins = int(item[4:],2)
+                if((hrs>=0 and hrs<=11) and (mins>=0 and mins<=59)):
+                    hrs = str(hrs)
+                    mins = str(mins).rjust(2,'0')
+                    ans.append(hrs+":"+mins)
+        return ans
