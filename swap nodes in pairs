@@ -1,0 +1,13 @@
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
+        if head==None or head.next==None:
+            return head
+        fast = head.next
+        slow = head
+        while fast!=None:
+            fast.val,slow.val=slow.val,fast.val
+            if fast.next==None:
+                break
+            slow=fast.next
+            fast=fast.next.next
+        return head
