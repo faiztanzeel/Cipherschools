@@ -1,0 +1,15 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        # Go from right to left till you find a peak:
+        p = len(nums) - 1
+        while p and nums[p] <= nums[p - 1]:
+            p -= 1
+
+        # Reverse the tail of nums from the peak:
+        nums[p:] = reversed(nums[p:])
+        
+        # Swap between the element just before the tail and
+        # the smallest element larger than him inside the tail:
+        if p:
+            q = bisect.bisect(nums, nums[p - 1], lo=p)
+            nums[p - 1], nums[q] = nums[q], nums[p - 1]
