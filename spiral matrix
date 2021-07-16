@@ -1,0 +1,30 @@
+class Solution:
+    def spiralOrder(self, matrix: List[List[int]]) -> List[int]:
+        m = len(matrix)
+        n = len(matrix[0])
+        res = [matrix[0][0]]
+        i = 0
+        j = 0
+        k = 0
+        direction = [[0,1], [1,0], [0,-1], [-1,0]]
+        visited = set()
+        visited.add((0,0))
+        while len(res) != m*n:
+            i += direction[k][0]
+            j += direction[k][1]
+
+            if i == m or j == n or i == -1 or j == -1 or (i,j) in visited:
+                i -= direction[k][0]
+                j -= direction[k][1]
+                k += 1                
+                k %= 4
+                i += direction[k][0]
+                j += direction[k][1]
+                
+
+            
+            res.append(matrix[i][j])
+            visited.add((i,j))
+                
+            
+        return res
