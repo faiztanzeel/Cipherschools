@@ -1,0 +1,11 @@
+class Solution:
+    def __init__(self):
+        self.mylist=[]
+        
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        cur=root
+        if cur:
+            self.mylist.append(cur.val)
+            self.preorderTraversal(cur.left)
+            self.preorderTraversal(cur.right)
+        return self.mylist
