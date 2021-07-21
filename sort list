@@ -1,0 +1,18 @@
+class Solution:
+    def sortList(self, head: ListNode) -> ListNode:
+        list=[]
+        while head:
+            list.append(head.val)
+            head=head.next
+        list.sort()
+        if len(list)==0:
+            return
+            
+        head=ListNode(list[0])
+        tail=head
+        e=1
+        while e < len(list):
+            tail.next = ListNode(list[e])
+            tail = tail.next
+            e+=1
+        return head
