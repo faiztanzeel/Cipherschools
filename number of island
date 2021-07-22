@@ -1,0 +1,29 @@
+def numIslands(grid):
+        
+        m = len(grid)
+        n = len(grid[0])
+        
+        #a node is say (i,j)
+        def bfs(node,queue,visited):
+            queue.append(node)
+            visited.add(node)
+            while(queue):
+                s = queue.pop()
+                grid[s[0]][s[1]] = "-1"
+                for i in [(-1,0),(1,0),(0,-1),(0,1)]:
+                    if (s[0] == 0 and i[0] == -1) or (s[1] == 0 and i[1] == -1) or (s[0] == m-1 and i[0] == 1) or (s[1] == n-1 and i[1] == 1):
+                        continue   
+                    if grid[s[0]+i[0]][s[1]+i[1]] == "1" and (s[0]+i[0],s[1]+i[1]) not in visited:
+                        queue.append((s[0]+i[0],s[1]+i[1]))
+                        visited.add((s[0]+i[0],s[1]+i[1]))
+        
+        count = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == "1":
+                    queue = []
+                    visited = set()
+                    bfs((i,j),queue,visited)
+                    count+=1
+        
+        return count
