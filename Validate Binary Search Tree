@@ -1,0 +1,17 @@
+def isValidBST(self, root: Optional[TreeNode]) -> bool:
+        stack, cur, prev = [], root, -2**31 - 1
+        while stack or cur:
+            # go down along the left path
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+
+            # no more left subtree, pop a node for processing
+            cur = stack.pop()
+            if cur.val <= prev:
+                return False
+
+            # move to the right subtree of @cur
+            prev = cur.val
+            cur = cur.right
+        return True
