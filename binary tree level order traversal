@@ -1,0 +1,24 @@
+def levelOrder(self, root: TreeNode) -> List[List[int]]:
+    if not root:
+        return []
+    if not root.left and not root.right:
+        return [[root.val]]
+    
+    ans = []
+    
+    q = deque([root])
+    
+    while len(q) > 0:
+        tmp = []
+        level = deque([])
+        while len(q) > 0:
+            node = q.pop() # back -> front
+            tmp.append(node.val)
+            if node.left:
+                level.appendleft(node.left)
+            if node.right:
+                level.appendleft(node.right)
+                
+        ans.append(tmp)
+        q = level
+    return ans
