@@ -1,0 +1,30 @@
+class MinStack:
+
+    def __init__(self):
+        """
+        initialize your data structure here.
+        """
+        self.stack = []
+        self.min_pointer = 0
+        
+    def _change_min_pointer(self):
+        current_min = float('inf')
+        for i , j  in enumerate(self.stack):
+            if current_min > j :
+                self.min_pointer = i
+                current_min  =j      
+        
+    def push(self, val: int) -> None:
+        self.stack.insert(0,val)
+        self._change_min_pointer()
+      
+
+    def pop(self) -> None:
+        self.stack.pop(0)
+        self._change_min_pointer()
+
+    def top(self) -> int:
+        return self.stack[0]
+
+    def getMin(self) -> int:
+        return self.stack[self.min_pointer]
