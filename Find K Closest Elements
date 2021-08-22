@@ -1,0 +1,4 @@
+class Solution(object):
+    def findClosestElements(self, arr, k, x):
+        
+        dist = sorted([(abs(x-i),i) for i in arr]); arr = sorted([dist[i][1] for i in range(k)]); return arr
