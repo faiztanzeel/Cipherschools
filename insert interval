@@ -1,0 +1,22 @@
+class Solution:
+    def insert(self, intervals: List[List[int]], newInterval: List[int]) -> List[List[int]]:
+        len_i = len(intervals)
+        starts = [0] * len_i
+        ends = [0] * len_i
+        for i, (s, e) in enumerate(intervals):
+            starts[i] = s
+            ends[i] = e
+        new_start, new_end = newInterval
+        start_idx = bisect_left(starts, new_start)
+        end_idx = bisect_left(ends, new_end)
+        if start_idx > 0:
+            if new_start <= ends[start_idx - 1]:
+                new_start = starts[start_idx - 1]
+                start_idx -= 1
+        if end_idx < len_i:
+            if new_end >= starts[end_idx]:
+                new_end = ends[end_idx]
+                end_idx += 1
+        new_intervals = (intervals[:start_idx] + [[new_start, new_end]] +
+                         intervals[end_idx:])
+        return new_intervals
