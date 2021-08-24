@@ -1,0 +1,17 @@
+import functools
+class Solution:
+    def uniquePaths(self, r: int, c: int) -> int:
+
+        @functools.lru_cache(maxsize=None)
+        def rec(i, j):
+            if i == 0 or j == 0:
+                return 1
+
+            o1 = rec(i - 1, j)
+            o2 = rec(i, j - 1)
+            return o1 + o2
+
+        return rec(r - 1, c - 1)
+
+sol = Solution()
+print(sol.uniquePaths(3,3))
