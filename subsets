@@ -1,0 +1,10 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        output = [[]] + [[k] for k in nums]
+        for j in range(len(nums)):
+            for i in range(len(output)):
+                if len(output[i]) == j:
+                    if not output[i]:
+                        continue
+                    output.extend([output[i] + [k] for k in nums if k > max(output[i])])
+        return output
