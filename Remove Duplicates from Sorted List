@@ -1,0 +1,16 @@
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if not head:
+            return head
+        curr = prev = head
+        last_val = -150 # this is not in the valid range, so using it for initialization
+        while curr:
+            if curr.val == last_val:
+                prev.next = curr.next
+            else:
+                last_val = curr.val
+                prev = curr
+
+            curr = curr.next
+            
+        return head
