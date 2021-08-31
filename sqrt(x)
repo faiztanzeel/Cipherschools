@@ -1,0 +1,20 @@
+class Solution:
+    def mySqrt(self, x: int) -> int:
+        
+        if x == 0 or x ==1:
+            return x
+        
+        r = y = x 
+        
+        while(r > 0):
+  
+            if y*y <= x and (y+1)*(y+1) >x:
+                break
+            elif y*y > x:
+                r = ceil(r/2)
+                y -= r
+            elif y*y < x:
+                r = ceil(r/2)
+                y += r
+            
+        return y
