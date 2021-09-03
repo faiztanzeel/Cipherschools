@@ -1,0 +1,17 @@
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        for i in range(len(matrix)):
+            if matrix[i][0] <= target <= matrix[i][-1]:
+                return self.binary_search(matrix[i], 0, len(matrix[i]),target)
+        return False
+    
+    def binary_search(self, mat, l, h, target):
+        if h >= l:
+            mid = (l + h) // 2
+            if mat[mid] == target:
+                return True
+            elif target < mat[mid]:
+                return self.binary_search(mat, l, mid - 1,target)
+            elif target > mat[mid]:
+                return self.binary_search(mat, mid + 1, h,target)
+        return False
