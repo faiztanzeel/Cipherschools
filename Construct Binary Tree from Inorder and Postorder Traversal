@@ -1,0 +1,27 @@
+class Solution:
+    def buildTree(self, inorder: List[int], postorder: List[int]) -> Optional[TreeNode]:
+        node_values_idx = {value: i for i, value in enumerate(inorder)}
+        
+        def buildTree(left_idx, right_idx):
+            # Reached the leaf value in the left most tree no more nodes to traverse
+            if left_idx > right_idx:
+                return None
+            
+            # get root value 
+            node_value = postorder.pop()
+            node_value_idx = node_values_idx[node_value]
+            node = TreeNode(node_value)
+            
+            # create right most tree first since we run pop()
+            right_tree = buildTree(node_value_idx + 1, right_idx)
+            
+            # create left tree
+            left_tree = buildTree(left_idx, node_value_idx - 1)
+        
+            # set children
+            node.left = left_tree
+            node.right = right_tree
+            
+            return node
+            
+        return buildTree(0, len(postorder)  - 1)
