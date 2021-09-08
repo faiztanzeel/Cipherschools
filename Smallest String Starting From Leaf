@@ -1,0 +1,21 @@
+class Solution:
+    def smallestFromLeaf(self, root: TreeNode) -> str:
+        mp = {}
+        for i in range(26):
+            mp[i] = chr(i+97)
+        # print(mp)
+        def helper(root, path):
+            if not root.left and not root.right:
+                path += mp[root.val]
+                res.append(path[::-1])
+            else:
+                path += mp[root.val]
+                if root.left:
+                    helper(root.left, path)
+                if root.right:
+                    helper(root.right, path)
+                
+        res = []
+        helper(root, "")
+        res.sort()
+        return res[0]
