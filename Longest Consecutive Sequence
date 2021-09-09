@@ -1,0 +1,28 @@
+from heapq import heapify, heappop
+
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        if nums is None or len(nums) == 0:
+            return 0
+        h = nums
+        heapify(h)
+        
+        prev = heappop(h)
+        count = 1
+        longest = 1
+
+        for i in range(len(nums)):
+            curr = heappop(h)
+            if prev == curr:
+                continue
+                
+            if prev+1 == curr:
+                count += 1
+            else:
+                count = 1
+                
+            longest = max(longest, count)
+            prev = curr
+
+            
+        return longest
