@@ -1,0 +1,30 @@
+class Solution:
+     
+		def isMatch(self, s: str, p: str) -> bool:
+			m = len(s)
+			n = len(p)
+
+			def helper(s,p,m,n):
+				if(s==p):
+					return True
+				if(m==0 and n==0):
+					return True
+				if(m!=0 and n==0):
+					return False
+				if(m==0 and n!=0):
+					if(p[n-1]=='*'):
+						return helper(s,p,m,n-2)
+					return False
+				if(s[m-1]==p[n-1] or p[n-1]=='.'):
+					return helper(s,p,m-1,n-1)
+				elif(p[n-1]=='*'):
+					if(helper(s,p,m,n-2)):
+						return True
+					if(s[m-1]==p[n-2]):
+						return helper(s,p,m-1,n)
+					if((s[m-1] != p[n-2]) and p[n-2]=='.'):
+						return helper(s,p,m-1,n)
+					return False
+				return False
+
+			return helper(s,p,m,n)
