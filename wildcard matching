@@ -1,0 +1,45 @@
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        # recursion + memorization    TC:O(SP)  SC: O(SP)
+        new_string = []
+        for char in p:
+            if new_string == [] or char != '*':
+                new_string.append(char)
+            elif new_string[-1] != '*':
+                new_string.append(char)
+        p = ''.join(new_string)
+        dp = {}
+        def dfs(i,j):
+            if (i,j) in dp:
+                return dp[(i,j)]
+            if i >= len(s) and j >= len(p):
+                dp[(i,j)] = True
+                return True
+            if (i >= len(s) and p[j] != '*') or j >= len(p):
+                dp[(i,j)] = False
+                return False
+            if p[j].isalpha():
+                if s[i] == p[j]:
+                    dp[(i,j)] = dfs(i+1,j+1)
+                    return dp[(i,j)]
+                else:
+                    return False
+            if p[j] == '?':
+                dp[(i,j)] = dfs(i+1,j+1)
+                return dp[(i,j)]
+            marker = False
+            if p[j] == '*':
+                for m in range(i,len(s)+1):
+                    dp[(m,j+1)] = dfs(m,j+1)
+                    if dp[(m,j+1)] == True:
+                        marker = True
+                        break
+                if marker == True:
+                    dp[i,j] = True
+                    return True
+                else:
+                    dp[i,j] = False
+                    return False
+            dp[i,j] = False
+            return False
+        return dfs(0,0)
