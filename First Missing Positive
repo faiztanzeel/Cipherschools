@@ -1,0 +1,21 @@
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        N=len(nums)
+		
+		#meaningfull idx will be 0~N only
+        for i in range(N):
+            if nums[i]<0 or nums[i]>N: nums[i]=0
+        
+		# add 1 element for easier handling
+		# mark nums[i] as negative if i appears in nums
+        nums.insert(0,0)
+        for x in nums:
+            if nums[abs(x)]!=0:
+                nums[abs(x)]=-abs(nums[abs(x)])
+            else:
+                nums[abs(x)]=-abs(x)
+        
+		#starting from 1, index of first positive result is missing positive
+        for i,x in enumerate(nums):
+            if i>0 and x>=0: return i
+        return N+1
