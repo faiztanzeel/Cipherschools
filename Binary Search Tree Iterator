@@ -1,0 +1,28 @@
+def rec(node):
+    if node.left:
+        yield from rec(node.left)
+    yield node.val
+    if node.right:
+        yield from rec(node.right)
+
+class BSTIterator:
+
+    def __init__(self, root: Optional[TreeNode]):
+        self.it = rec(root)
+        self.next1 = next(self.it,None)
+        if self.next1!=None:
+            self.hasnext=True
+        else:
+            self.hasnext=False
+        
+    def next(self) -> int:
+        temp=self.next1
+        self.next1 = next(self.it,None)
+        if self.next1!=None:
+            self.hasnext=True
+        else:
+            self.hasnext=False
+        return temp
+
+    def hasNext(self) -> bool:
+        return self.hasnext
