@@ -1,0 +1,14 @@
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        result = [0, 0]
+        def traverse(root):
+            if not root:
+                return
+            traverse(root.left)
+            if result[0] == k:
+                return            
+            result[0] += 1
+            result[1] = root.val
+            traverse(root.right)
+        traverse(root)
+        return result[1]
