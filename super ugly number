@@ -1,0 +1,13 @@
+class Solution:
+    def nthSuperUglyNumber(self, n: int, primes: List[int]) -> int:
+        dp = [1]
+        p_index = [0 for i in range(len(primes))]
+        
+        for i in range(1, n):
+            p_weight = [dp[e]*primes[j] for j,e in enumerate(p_index)]
+            min_i = min(p_weight)
+            dp.append(min_i)
+            for j,e in enumerate(p_weight):
+                if e == min_i: p_index[j] += 1
+            
+        return dp[-1]
