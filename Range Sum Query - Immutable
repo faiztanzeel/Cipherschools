@@ -1,0 +1,20 @@
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        '''
+        Complexity:
+            time: O(N) for just 1 pre-computamtion call
+            space: O(N)
+        '''
+        self.prefix_sum = [0]
+        for i, num in enumerate(nums):
+            self.prefix_sum.append(self.prefix_sum[i] + num)
+        
+
+    def sumRange(self, left: int, right: int) -> int:
+        '''
+        Complexity:
+            time: O(1) for each loop or call of sumRange
+            space: O(1)
+        '''
+        return self.prefix_sum[right + 1] - self.prefix_sum[left]
