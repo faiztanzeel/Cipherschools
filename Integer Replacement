@@ -1,0 +1,26 @@
+class Solution(object):
+    def integerReplacement(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        '''
+        Idea : BFS problem 
+            - Change the question into graph problem 
+            - The sonnest you get to the divsion resulting 1 --> return that depth
+        '''
+        if not n:
+            return 0
+        import collections 
+        memo = collections.defaultdict(int)        
+        queue = []
+        queue.append((n,0))        
+        while queue:
+            node, depth = queue.pop(0)
+            if node == 1:
+                return depth
+            if node%2 ==0:
+                queue.append((node//2,depth+1))
+            else:
+                queue.append((node-1,depth+1))
+                queue.append((node+1,depth+1))
