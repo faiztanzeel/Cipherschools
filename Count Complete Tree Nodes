@@ -1,0 +1,17 @@
+class Solution:
+    def getCount(self, root, isLeft):
+        count = 0
+        while root:
+            count += 1
+            root = root.left if isLeft else root.right
+        return count
+    
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        if not root:
+            return 0
+        
+        l, r = self.getCount(root, True), self.getCount(root, False)
+        if l == r:
+            return 2 ** l - 1
+        
+        return 1 + self.countNodes(root.left) + self.countNodes(root.right)
