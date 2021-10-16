@@ -1,0 +1,28 @@
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        
+        def bfs(r, c, vis):
+            queue = deque([(r, c, vis)])
+            while queue:
+                r, c, vis = queue.popleft()
+                for nr, nc in [(r-1, c), (r, c-1), (r, c+1), (r+1, c)]:
+                    if nr in range(M) and nc in range(N) and heights[r][c] <= heights[nr][nc] and (nr, nc) not in vis:
+                        vis.add((nr, nc))
+                        queue.append((nr, nc, vis))
+        
+        M, N = len(heights), len(heights[0])
+        pac, atl, result = set(), set(), []
+        for c in range(N):
+            bfs(0, c, pac), bfs(M-1, c, atl)
+            pac.add((0, c)), atl.add((M-1, c))
+            
+        for r in range(M):
+            bfs(r, 0, pac), bfs(r, N-1, atl)
+            pac.add((r, 0)), atl.add((r, N-1))
+        
+        for r in range(M):
+            for c in range(N):
+                if (r, c) in pac and (r, c) in atl:
+                    result.append([r, c])
+        
+        return result
