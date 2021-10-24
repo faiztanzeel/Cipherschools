@@ -1,0 +1,57 @@
+class Solution:
+    def change(self, amount: int, coins: List[int]) -> int:
+       
+        # If amount is zero, it can be achieved using
+        # a null set, so return 1
+        if not amount:
+            return 1
+        
+        # For all other cases unbounded knapsack
+        def dp(n,w):
+            
+            # Make a dictionary
+            t = dict()
+            
+            # For all possible value of items/coins
+            for i in range(n+1):
+                
+                # For all possible value of amount
+                for j in range(w+1):
+                    
+                    # Make a key
+                    key = (i,j)
+                    
+                    # if coins are exhausted
+                    if i == 0:
+
+                        # if amount is zero, for null set return 1
+                        if j == 0:
+                            t[key] = 1
+
+                        # else return 0, as there cannot be any set
+                        # of coins to make upto this amount
+                        else:
+                            t[key] = 0
+
+                    # If amount is zero, for null set return 1
+                    elif j == 0:
+                        t[key] = 1
+
+                    # For all other condition
+                    else:
+
+                        # If current coin is less or eq than the amount, in that case
+                        # we must either include the coin and suppose it will
+                        # also be included later in the process, or we could
+                        # exclude the coin from the process
+                        if coins[i-1] <= j:
+                            t[key] = t[(i, j-coins[i-1])] + t[(i-1, j)]
+
+                        # If current coin greater value than amount, exclude
+                        # it from the process
+                        else:
+                            t[key] = t[(i-1, j)]
+                
+            return t[key]
+        
+        return dp(len(coins), amount)
