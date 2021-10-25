@@ -1,0 +1,29 @@
+class Solution:
+    def predictPartyVictory(self, senate: str) -> str:
+        groups = [[key, len(tuple(g))] for key, g in groupby(senate)]
+        while len(groups) > 1:
+            i = 0
+            while i < len(groups):
+                group_count = 0
+                while group_count < groups[i][1] and len(groups) > 1:
+                    next_i = (i + 1) % len(groups)
+                    if groups[i][0] == groups[next_i][0]:
+                        i = next_i
+                        break
+                    groups[next_i][1] -= 1
+                    if groups[next_i][1] == 0:
+                        groups.pop(next_i)
+                        if next_i == 0 and i > 0:
+                            i -= 1
+                        while (len(groups) > 1 and
+                               groups[i][0] ==
+                               groups[(i + 1) % len(groups)][0]):
+                            next_i = (i + 1) % len(groups)
+                            groups[i][1] += groups[next_i][1]
+                            groups.pop(next_i)
+                            if next_i == 0 and i > 0:
+                                i -= 1
+                    group_count += 1
+                else:
+                    i += 1
+        return "Radiant" if groups[0][0] == "R" else "Dire"
