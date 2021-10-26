@@ -1,0 +1,57 @@
+from collections import defaultdict, deque
+
+
+def convertToAdjList(numCourses, prerequisites):
+    """
+    Return an adjacency list
+    """
+    adjHash = defaultdict(list)
+    for course, prereq in prerequisites:
+        adjHash[prereq].append(course)
+        
+    return [adjHash[node] if node in adjHash else [] for node in range(numCourses)]
+    
+
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        
+        """
+        Flag status meaning:
+            -1: unvisited
+            0: visted once but not in stack
+            1: visted and in stack
+        """
+        nodeFlag = {node:-1 for node in range(0, numCourses)}  # start all nodes with the unvisted status
+        adjList = convertToAdjList(numCourses, prerequisites)
+        stack = deque()
+        
+        def isCycle(node, adjList, nodeFlag):
+            """ 
+            Returns True if there is a cycle detected and will also add nodes to the stack
+            """
+            flagStatus = nodeFlag[node]
+            
+            if flagStatus == 0:
+                # cycle detected
+                return True
+            
+            if flagStatus == 1:
+                "Already in the stack no need to do anything"
+                return False
+            
+            if flagStatus == -1:
+                nodeFlag[node] = 0
+    
+                for adjNode in adjList[node]:
+                    if isCycle(adjNode, adjList, nodeFlag):
+                        return True
+                
+                nodeFlag[node] = 1
+                stack.appendleft(node)
+                
+            
+        for node in range(numCourses):
+            if isCycle(node, adjList, nodeFlag):
+                return []
+            
+        return stack
