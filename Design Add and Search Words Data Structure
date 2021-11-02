@@ -1,0 +1,29 @@
+class WordDictionary(object):
+
+    def __init__(self):
+        self.set = set()
+        self.sizeDict = defaultdict(set)
+        self.letterDict = defaultdict(lambda: defaultdict(set))
+
+    def addWord(self, word):
+        """
+        :type word: str
+        :rtype: None
+        """
+        self.sizeDict[len(word)].add(word)
+        self.set.add(word)
+        for i,char in enumerate(word):
+            self.letterDict[i][char].add(word)
+
+    def search(self, word):
+        """
+        :type word: str
+        :rtype: bool
+        """
+        if word in self.set:
+            return True
+        charIdx = [i for i,char in enumerate(word) if char != "."]
+        contCheck = self.sizeDict[len(word)]
+        for i in charIdx:
+            contCheck = contCheck & self.letterDict[i][word[i]]
+        return bool(len(contCheck))
