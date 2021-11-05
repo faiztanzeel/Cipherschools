@@ -1,0 +1,20 @@
+from collections import deque
+class Solution:
+	def largestValues(self, t: Optional[TreeNode]) -> List[int]:
+		q = deque()
+		if t: q.append((t,0))
+		else:
+			return []
+		max_val = []
+		while q:
+			ele, level = q.popleft()
+
+			if len(max_val) < level+1:
+				max_val.append(float('-inf')) 
+
+			max_val[level] = max(max_val[level], ele.val)
+
+			if ele.left: q.append((ele.left,level+1))
+			if ele.right: q.append((ele.right,level+1))
+
+		return max_val
