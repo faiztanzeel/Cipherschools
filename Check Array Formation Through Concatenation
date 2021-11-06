@@ -1,0 +1,20 @@
+class Solution:
+    def canFormArray(self, arr: List[int], pieces: List[List[int]]) -> bool:
+        res = []
+       
+        n = len(arr)
+        indexes = {}
+        for i in range(len(pieces)):
+            indexes[pieces[i][0]] = i 
+        idx = 0 
+        while idx < n:
+            if arr[idx] not in indexes:
+                return False
+            item = pieces[indexes[arr[idx]]]
+            for j in range(len(item)):
+                if arr[idx+j] != item[j]:
+                    return False
+                else:
+                    res.append(item[j])
+            idx += len(item)
+        return True
