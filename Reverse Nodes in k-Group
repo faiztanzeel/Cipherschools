@@ -1,0 +1,28 @@
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        def rev_k(a, b):
+            u, v = b.next, a
+            while True:
+                v.next, v, u = u, v.next, v
+                if u is b:
+                    break
+            return b
+        
+        def step(a, n):
+            for _ in range(n):
+                if not a:
+                    return a
+                a = a.next
+            return a
+        
+        if k == 1:
+            return head
+        
+        sentinel = ListNode(-1, head)
+        pre, a, b = sentinel, head, step(head, k - 1)
+        while b:
+            pre.next = rev_k(a, b)
+            pre, a = a, a.next
+            b = step(a, k - 1)
+
+        return sentinel.next
