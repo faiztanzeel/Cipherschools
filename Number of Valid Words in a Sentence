@@ -1,0 +1,33 @@
+class Solution:
+    def countValidWords(self, sentence: str) -> int:
+        ans = 0
+        split = sentence.split(" ")
+
+        def is_lower(c):
+            if ord('a')<=ord(c)<= ord('z'):
+                return True
+            return False
+
+        def valid(w):
+            count = 0
+            for i, c in enumerate(w):
+                if c.isdigit():
+                    return False
+                if c == '-':
+                    if i == 0 or i == len(w)-1:
+                        return False
+                    if not is_lower(w[i-1]) or not is_lower(w[i+1]):
+                        return False
+                    if count != 0:
+                        return False
+                    count += 1
+                if c in '!.,' and not i == len(w)-1:
+                    return False
+
+            return True
+
+        for w in split:
+            if w and valid(w):
+                ans += 1
+        
+        return ans
