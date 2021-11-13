@@ -1,0 +1,13 @@
+class Solution:
+    def findBottomLeftValue(self, root: Optional[TreeNode]) -> int:
+        queue = [root]
+        while queue:
+            node = queue.pop(0)
+            # We do not have any more items to visit, meaning we hit the end.
+            if not queue and not node.left and not node.right:
+                return node.val
+            # The leftmost item in a row is always the last item in the queue.
+            if node.right:
+                queue.append(node.right)
+            if node.left:
+                queue.append(node.left)
