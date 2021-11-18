@@ -1,0 +1,49 @@
+class Solution(object):
+    def replaceWords(self, dictionary, sentence):
+        """
+        :type dictionary: List[str]
+        :type sentence: str
+        :rtype: str
+        """
+        
+        
+        class node:
+            def __init__(self):
+                self.children = defaultdict(node)
+                self.isend = False
+                
+        class trie:
+            def __init__(self):
+                self.root = node()
+            def insert(self,key):
+                
+                cur = self.root
+                
+                for i in key:
+                    cur = cur.children[i]
+                cur.isend =True
+                
+            def search(self,key):
+                cur = self.root
+                
+                for i in range(len(key)):
+                    if key[i] in cur.children:
+                        cur = cur.children[key[i]]
+                        if cur.isend:
+                            return key[:i+1]
+                    else:
+                        return None
+        
+        t = trie()
+        for i in dictionary:
+            t.insert(i)
+        
+        sentence  =  (sentence.split())
+        
+        for i in range(len(sentence)):
+            a = t.search(sentence[i])
+            print(a)
+            if a:
+                sentence[i]=a
+                
+        return ' '.join(sentence)
