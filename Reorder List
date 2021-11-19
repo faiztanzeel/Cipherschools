@@ -1,0 +1,33 @@
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        lst = []
+        ans = []
+        p = head
+        while p:
+            lst.append(p.val)
+            
+            p = p.next
+        
+        if len(lst) > 1:
+            
+            first = lst[:len(lst)//2]
+
+            end = lst[len(lst)//2:][::-1]
+            
+            
+            for i in range(len(first)):
+                
+                ans.append(first[i])
+                ans.append(end[i])
+            
+            if len(lst) % 2 !=0:
+                ans.append(end[-1])
+            
+            node = head
+            
+            for i in ans:
+                
+                node.val, node = i, node.next
