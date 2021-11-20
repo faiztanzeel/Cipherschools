@@ -1,0 +1,26 @@
+from collections import defaultdict
+
+class Solution:
+    
+    def sum_of_sub(self,root):
+        if not root:
+            return 0
+        
+        root_sum = root.val + self.sum_of_sub(root.left) + self.sum_of_sub(root.right)
+        self.sum_dict[root_sum]+=1
+        return root_sum
+    
+    def findFrequentTreeSum(self, root: Optional[TreeNode]) -> List[int]:
+        self.sum_dict = defaultdict(int)
+        self.sum_of_sub(root)
+        prev_max = float('-inf')
+        ans = []
+        print( self.sum_dict)
+        for i in self.sum_dict:
+            if self.sum_dict[i] >= prev_max:
+                if self.sum_dict[i] > prev_max and len(ans) > 0:
+                    ans = []
+                ans.append(i)
+                prev_max =  self.sum_dict[i]
+                
+        return ans
