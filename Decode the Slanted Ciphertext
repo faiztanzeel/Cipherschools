@@ -1,0 +1,10 @@
+class Solution:
+    def decodeCiphertext(self, encodedText: str, rows: int) -> str:
+        cols = len(encodedText)//rows
+        ans = []
+        for offset in range(cols): 
+            i, j = 0, offset
+            while i*cols+j < len(encodedText): 
+                ans.append(encodedText[i*cols+j])
+                i, j = i+1, j+1
+        return "".join(ans).rstrip()
