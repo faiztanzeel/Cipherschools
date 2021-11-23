@@ -1,0 +1,13 @@
+class Solution:
+    def isSubsequence(self, s: str, t: str) -> bool:
+        j = 0                               # loop index in string t
+        for i in range(len(s)):             # loop index in string s
+            j = self.loopfind(s, i, t, j)
+            if j == len(t) + 1:             # identify whether character in string t
+                return False
+        return True
+    def loopfind(self, s, i, t, j):         # find character in string t
+        for j in range(j, len(t)):
+            if s[i] == t[j]:
+                return j + 1                # return j + 1 to make sure sequence is correct
+        return len(t) + 1                   # character dose not in string t
