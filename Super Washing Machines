@@ -1,0 +1,14 @@
+class Solution:
+    def findMinMoves(self, machines):
+        summ = sum(machines)
+        n, l = len(machines), summ // len(machines)
+        if summ % n != 0: return -1
+
+        maxx = max(machines) - l
+        left_sum, right_sum = 0, 0
+        for k in range(1, n + 1):
+            left_sum += machines[k - 1]
+            right_sum += machines[n - k]
+            maxx = max(maxx, l * k - left_sum, l * k - right_sum)
+
+        return maxx
