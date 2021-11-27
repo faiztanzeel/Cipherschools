@@ -1,0 +1,40 @@
+class Solution:
+    def __init__(self):
+        self.graph = {}
+    
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        # create graph
+        for fr, to, wt in times:
+            if fr in self.graph:
+                self.graph[fr].append((to, wt))
+            else:
+                self.graph[fr] = [(to, wt)]  
+            if to not in self.graph:
+                self.graph[to] = []     
+                
+        return self.dijkstra(n, k)
+                
+    def dijkstra(self, n, k):
+        unvisited = set(self.graph.keys())
+        shortest = {}
+        maxval = sys.maxsize
+        for node in self.graph:
+            shortest[node] = maxval
+        shortest[k] = 0
+        
+        discovered = {k}
+        
+        while len(unvisited) > 0:
+            u = min(unvisited, key=lambda node : shortest[node])
+            if u not in discovered:
+                break
+                
+            for v, weight in self.graph[u]:
+                if shortest[u] + weight < shortest[v]:
+                    shortest[v] = shortest[u] + weight
+                discovered.add(v)
+                
+            unvisited.remove(u)
+            
+        if len(discovered) < n: return -1
+        else: return max(shortest.values())
