@@ -1,0 +1,26 @@
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        ans = []
+        # If "popped" is not empty, we keep worknig on it.
+        while len(popped) != 0:
+            # If ans is empty, we should append the first element from the "pushed".
+            # Also, we must remember to remove the element from the "pushed".
+            if len(ans) == 0:
+                ans.append(int(pushed[0]))
+                pushed.pop(0)
+            # Create an index that allows us to find the last element of the "ans".
+            index = len(ans)-1
+            # If the "ans"'s last ele is not equal to the first ele of "popped", then we keep adding the ele from "pushed". 
+            if int(ans[index]) != int(popped[0]):
+                if len(pushed) != 0:
+                    add = pushed[0]
+                    ans.append(add)
+                    pushed.pop(0)
+                # Considering when the "pushed" is empty, we have nothing to add in the "ans".
+                else:
+                    break
+            # Else, we have to remove the ele from the "ans" and the "popped".
+            else:
+                ans.pop()
+                popped.pop(0)
+        return len(ans) == 0
