@@ -1,0 +1,15 @@
+class WordFilter:
+
+    def __init__(self, words: List[str]):
+        _words = {}
+        for i, word in enumerate(words):
+            _words[word] = i
+        self.words = _words
+
+    def f(self, prefix: str, suffix: str) -> int:
+        prefix_slice = slice(0, len(prefix))
+        suffix_slice = slice(~(len(suffix) - 1), None)
+        for word, index in reversed(self.words.items()):
+            if word[prefix_slice] == prefix and word[suffix_slice] == suffix:
+                return index
+        return -1
