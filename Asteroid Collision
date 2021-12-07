@@ -1,0 +1,26 @@
+class Solution:
+    def asteroidCollision(self, asteroids: List[int]) -> List[int]:
+        currentAstroid = len(asteroids) - 2
+        totalAsteroids = len(asteroids)
+        
+        while currentAstroid >= 0 and totalAsteroids > 0:
+            if (currentAstroid + 1) >= totalAsteroids:
+                currentAstroid -= 1
+            else:
+                if (asteroids[currentAstroid] < 0) or (asteroids[currentAstroid] > 0 and asteroids[currentAstroid + 1] > 0):
+                    currentAstroid -= 1
+                else:
+                    if asteroids[currentAstroid] + asteroids[currentAstroid + 1] == 0:
+                        for i in range(2):
+                            asteroids.pop(currentAstroid)
+                        currentAstroid -= 1
+                        totalAsteroids -= 2
+                    else:
+                        if abs(asteroids[currentAstroid]) < abs(asteroids[currentAstroid + 1]):
+                            asteroids.pop(currentAstroid)
+                            currentAstroid -= 1
+                        else:
+                            asteroids.pop(currentAstroid + 1)
+                        totalAsteroids -= 1
+                        
+        return asteroids
