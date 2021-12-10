@@ -1,0 +1,14 @@
+class Solution:
+    def monotoneIncreasingDigits(self, N: int) -> int:
+        s = list(map(int, str(N)))
+        for i in range(len(s)-1):
+            if s[i] > s[i+1]:
+                break
+        if not (i == len(s) - 2 and s[i] <= s[i+1]):
+            for j in range(i, -1, -1):
+                s[j] -= 1
+                if i > 0 and s[j-1] <= s[j]:
+                    break
+            for k in range(j+1, len(s)):
+                s[k] = 9
+        return int(''.join(map(str, s)))
