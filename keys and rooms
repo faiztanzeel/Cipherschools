@@ -1,0 +1,17 @@
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        def dfs(rooms, arr, reachable, index): #arr = current room
+            reachable.add(index) # current index | room where we are at
+            for i in range(len(arr)):
+                if arr[i] not in reachable:
+                    reachable.add(arr[i])
+                    index = arr[i]
+                    dfs(rooms, rooms[arr[i]], reachable, index)
+
+
+        reachable = set() # set with the keys of rooms we have
+        dfs(rooms, rooms[0], reachable, 0)
+        for i in range(len(rooms)):
+            if i not in reachable:
+                return False
+        return True
