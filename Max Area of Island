@@ -1,0 +1,22 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        dirs = ((0, 1), (0, -1), (1, 0), (-1, 0))
+        m, n = len(grid), len(grid[0])
+        
+        def find_isle(x, y):
+            nonlocal m, n, dirs
+            area, grid[x][y] = 1, 0
+            for dx, dy in dirs:
+                cx, cy = x + dx, y + dy
+                if 0 <= cx < m and 0 <= cy < n:
+                    if grid[cx][cy]:
+                        area += find_isle(cx, cy)
+            return area
+        
+        # main()
+        from itertools import product
+        ans = 0
+        for i, j in product(range(m), range(n)):
+            if grid[i][j]:
+                ans = max(ans, find_isle(i, j))
+        return ans
