@@ -1,0 +1,38 @@
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        nums = [1] + nums + [1]
+        size = len(nums)        
+        
+        t = [[-1 for p in range(0,size+1)]
+            for q in range(0,size+1)]
+        
+        return self.solve(nums,1,size-1,t)
+        
+    def solve(self,arr,i,j,t):
+        if i >= j:
+            return 0
+        
+        if t[i][j] > 0:
+            return t[i][j]
+        
+        ans = float('-inf')
+        
+        for k in range(i,j):
+            if t[i][k] != -1:
+                left = t[i][k]
+            else:
+                left = self.solve(arr,i,k,t)
+                t[i][k] = left
+                
+            if t[k+1][j] != -1:
+                right = t[k+1][j]
+            else:
+                right = self.solve(arr,k+1,j,t)
+                t[k+1][j] = right
+                
+            temp = left + right + (arr[i-1]*arr[k]*arr[j])
+            
+            ans = max(ans,temp)
+            
+        t[i][j] = ans
+        return t[i][j]
