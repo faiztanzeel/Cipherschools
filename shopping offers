@@ -1,0 +1,11 @@
+class Solution:
+    def shoppingOffers(self, price: List[int], special: List[List[int]], needs: List[int]) -> int:
+        @functools.lru_cache(maxsize=None)
+        def dfs(needs):
+            ans = sum(a * b for a, b in zip(price, needs))
+            for s in special:
+                needsCopy = tuple(b - a for a, b in zip(s[:len(s)-1], needs))
+                if all(n >= 0 for n in needsCopy):
+                    ans = min(ans, dfs(needsCopy) + s[len(s)-1])
+            return ans         
+        return dfs(tuple(needs))
