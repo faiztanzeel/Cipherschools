@@ -1,0 +1,16 @@
+from collections import defaultdict
+class Solution:
+    def minAreaRect(self, points: List[List[int]]) -> int:
+        line = defaultdict(list)
+        min_area = float("inf")
+        points.sort(key = lambda x:(x[0],x[1]))
+        for i in range(len(points)):
+            for j in range(i+1, len(points)):
+                p1 = points[i]
+                p2 = points[j]
+                if p1[0]!=p2[0]:
+                    break
+                if (p1[1],p2[1]) in line:
+                    min_area = min(min_area, abs(p1[0]-max(line[(p1[1],p2[1])]))*abs(p1[1]-p2[1]))
+                line[(p1[1],p2[1])].append(p1[0])
+        return min_area if min_area!=float("inf") else 0
