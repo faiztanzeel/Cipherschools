@@ -1,0 +1,30 @@
+import bisect as bi
+class MyCalendarTwo:
+    def __init__(self):
+        self.s_points = []
+        self.e_points = []
+
+
+    def book(self, start: int, end: int) -> bool:
+
+        i = bi.bisect_left(self.s_points, start)
+        j = bi.bisect_right(self.e_points, start)
+
+        cur_intv = i - j
+        if cur_intv > 1: return False
+
+        while i < len(self.s_points) and j < len(self.e_points) and min(self.s_points[i], self.e_points[j]) < end:
+
+            if self.e_points[j] <= self.s_points[i]:
+                cur_intv -= 1
+                j += 1
+            else:
+                cur_intv += 1
+                i += 1
+
+            if cur_intv > 1: return False
+
+        bi.insort(self.s_points, start)
+        bi.insort(self.e_points, end)
+
+        return True
