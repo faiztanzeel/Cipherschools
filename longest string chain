@@ -1,0 +1,30 @@
+class Solution:
+    def longestStrChain(self, words: List[str]) -> int:
+        
+        # hash set
+        # for each word try removing one letter and see if its in the set
+        # if it is then count += 1
+        
+        # word[0:i] + word[i+1:]
+        
+        ans = 1
+        
+        h = set()
+        
+        for word in words:
+            h.add(word)
+        
+        def recursion(word, count, seen):
+            seen.add(word)
+            curr_count = count
+            for i in range(len(word)):
+                sub_word = (word[:i] + word[i+1:])
+                if sub_word not in seen and sub_word in h:
+                    curr_count = max(recursion(sub_word , count + 1, seen), curr_count)
+            return curr_count
+        
+        
+        for i in range(len(words)):
+            ans = max(recursion(words[i], 1, set()),ans)
+            
+        return ans
