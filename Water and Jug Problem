@@ -1,0 +1,8 @@
+class Solution:
+    def canMeasureWater(self, a: int, b: int, c: int) -> bool:
+        import math
+        if a==b:
+            return c== a
+        if c> a+b:
+            return False 
+        return c % math.gcd(a, b) == 0
