@@ -1,0 +1,13 @@
+class Solution:
+    def numSubarraysWithSum(self, A: List[int], S: int) -> int:
+        zgaps,gap = [],0
+        for v in A:
+            if v:
+                zgaps+=[gap]
+                gap=0
+            else:
+                gap+=1
+        zgaps+=[gap]
+        if S==0:
+            return sum([(g*(g+1))//2 for g in zgaps])
+        return sum([(zgaps[i]+1)*(zgaps[i+S]+1) for i in range(len(zgaps)-S)])
