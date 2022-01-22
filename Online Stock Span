@@ -1,0 +1,15 @@
+class StockSpanner:
+
+    def __init__(self):
+        self.spanner = []
+
+    def next(self, price: int) -> int:
+        top_ind = 1 if not self.spanner else self.spanner[-1][1] + 1
+        while(self.spanner):
+            if self.spanner[-1][0] <= price:
+                self.spanner.pop()
+            else:
+                break
+        ans = top_ind - (0 if not self.spanner else self.spanner[-1][1])
+        self.spanner.append((price, top_ind))
+        return ans
