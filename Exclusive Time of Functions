@@ -1,0 +1,12 @@
+class Solution:
+    def exclusiveTime(self, n: int, logs: List[str]) -> List[int]:
+        ans = [0]*n
+        stack = [] # stack of fid 
+        for log in logs: 
+            fid, flag, time = log.split(":")
+            fid, flag, time = int(fid), flag == "end", int(time)
+            if stack: ans[stack[-1]] += time - pt + (flag - pf)
+            if flag: stack.pop()
+            else: stack.append(fid)
+            pf, pt = flag, time 
+        return ans 
