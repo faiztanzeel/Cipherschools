@@ -1,0 +1,16 @@
+class Solution(object):
+    def maxProfitAssignment(self, difficulty, profit, worker):
+        jobs = [(-profit[i],difficulty[i]) for i in range(len(difficulty))]
+        heapq.heapify(jobs)
+        worker.sort(reverse=True)
+        total_profit = 0
+        for w in worker:
+            negative_job_profit, diff = heapq.heappop(jobs)
+            while w < diff and jobs:
+                negative_job_profit, diff= heapq.heappop(jobs)
+            if jobs or (not jobs and w >= diff):
+                heapq.heappush(jobs,(negative_job_profit,diff))
+                total_profit += negative_job_profit * -1
+            else:
+                return total_profit
+        return total_profit
