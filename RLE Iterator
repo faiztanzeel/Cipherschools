@@ -1,0 +1,27 @@
+class RLEIterator:
+
+    def __init__(self, encoding: List[int]):
+        self._index = 0
+        self._used = 0
+        self._encoding = encoding
+
+    def next(self, n: int) -> int:
+        if self._index >= len(self._encoding):
+            return -1
+
+        v = -1
+
+        while n and self._index < len(self._encoding):
+            u = min(n, self._encoding[self._index] - self._used)
+
+            if u:
+                n -= u
+                v = self._encoding[self._index + 1]
+
+                self._used += u
+
+            if self._used == self._encoding[self._index]:
+                self._used = 0
+                self._index += 2
+
+        return -1 if n else v
