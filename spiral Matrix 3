@@ -1,0 +1,22 @@
+class Solution(object):
+    def spiralMatrixIII(self, rows, cols, rStart, cStart):
+        """
+        :type rows: int
+        :type cols: int
+        :type rStart: int
+        :type cStart: int
+        :rtype: List[List[int]]
+        """
+        directions = [(0,1), (1,0), (0, -1), (-1, 0)]
+        output = []
+        a_n = 0 # Sequence number
+        d = 0   # Current direction (-> ↓ <- ↑)
+        while len(output) < rows * cols:
+            for i in range(a_n/2 + 1):
+                if 0 <= rStart < rows and 0 <= cStart < cols:
+                    output.append([rStart, cStart])
+                rStart += directions[d][0]
+                cStart += directions[d][1]
+            a_n += 1
+            d = (d + 1) % 4
+        return output
