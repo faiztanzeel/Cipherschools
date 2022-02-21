@@ -1,0 +1,11 @@
+class Solution:
+    def numSub(self, s: str) -> int:
+        y=s.split('0')
+        p=0
+        mod=1000000007
+
+        for i in range(len(y)):
+            count=((len(y[i]))%mod)
+            p+=((((count)*(count+1))//2)%mod)
+
+        return p
