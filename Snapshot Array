@@ -1,0 +1,25 @@
+from collections import defaultdict
+
+class SnapshotArray:
+
+    def __init__(self, length: int):
+        self.__snapshot_arr = defaultdict(lambda: 0)
+        self.__snap_id = 0
+        self.__snapshot_arrs = list()
+        return
+        
+
+    def set(self, index: int, val: int) -> None:
+        self.__snapshot_arr[index] = val
+        return
+        
+
+    def snap(self) -> int:
+        self.__snap_id += 1
+        self.__snapshot_arrs.append(self.__snapshot_arr.copy())
+        return self.__snap_id-1
+        
+
+    def get(self, index: int, snap_id: int) -> int:
+        return self.__snapshot_arrs[snap_id][index]
+        
