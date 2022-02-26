@@ -1,0 +1,24 @@
+class Solution:
+    def deepestLeavesSum(self, root: Optional[TreeNode]) -> int:
+        
+        q = deque()
+        q.append(root)
+        
+        deepest_sum = 0
+        
+        while q:
+            
+            deepest_sum = 0
+            
+            for _ in range(len(q)):
+            
+                current = q.popleft()
+                deepest_sum += current.val
+
+                if current.left: 
+                    q.append(current.left)
+
+                if current.right:
+                    q.append(current.right)
+
+        return deepest_sum
