@@ -1,0 +1,20 @@
+class Solution(object):
+    def videoStitching(self, clips, time):
+        """
+        :type clips: List[List[int]]
+        :type time: int
+        :rtype: int
+        """
+        sim = [0] * (time + 1)
+        for s, e in clips:
+            if s <= time:
+                sim[s] = max(sim[s], e - s)
+            
+        dp = [float('inf')] * (time + 1)
+        dp[0] = 0
+        for i, j in enumerate(sim):
+            while j > 0:
+                if i + j < len(dp):
+                    dp[i+j] = min(dp[i+j], dp[i]+1)
+                j -= 1
+        return dp[-1] if dp[-1] < float('inf') else -1 
