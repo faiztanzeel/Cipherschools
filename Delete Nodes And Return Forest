@@ -1,0 +1,19 @@
+class Solution:
+    def delNodes(self, root: Optional[TreeNode], to_delete: List[int]) -> List[TreeNode]:
+        result = list()
+        to_delete = {e: True for e in to_delete}
+        def dfs(node):
+            if node is None:
+                return None
+            l = dfs(node.left)
+            r = dfs(node.right)
+            if node.val in to_delete:
+                e = list()
+                if l: e.append(l)
+                if r: e.append(r)
+                result.extend(e)
+                return None
+            return TreeNode(node.val, l, r)
+        r = dfs(root)
+        if r: result.append(r)
+        return result
