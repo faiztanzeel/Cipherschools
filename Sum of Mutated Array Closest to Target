@@ -1,0 +1,16 @@
+class Solution:
+    def findBestValue(self, arr: List[int], target: int) -> int:
+        arr.sort()
+        prevTotal = 0
+        remaining = len(arr)
+        
+        for num in arr:
+            total = prevTotal + (num*remaining)
+            if total >= target:
+                val = (target-prevTotal)//remaining
+                pos1 = prevTotal + val*remaining
+                pos2 = prevTotal + (val+1)*remaining
+                return val if abs(target-pos1) <= abs(target-pos2) else val+1
+            remaining -= 1
+            prevTotal += num
+        return arr[-1]
