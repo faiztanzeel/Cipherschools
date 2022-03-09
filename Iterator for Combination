@@ -1,0 +1,15 @@
+from itertools import combinations
+class CombinationIterator:
+
+    def __init__(self, characters: str, combinationLength: int):
+        self.combs = ["".join(c)
+                      for c in combinations(characters, combinationLength)]
+        self.len_combs1 = len(self.combs) - 1
+        self.idx = -1
+
+    def next(self) -> str:
+        self.idx += 1
+        return self.combs[self.idx]
+
+    def hasNext(self) -> bool:
+        return self.idx < self.len_combs1
