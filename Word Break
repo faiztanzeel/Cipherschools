@@ -1,0 +1,25 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        # initialize array to False
+        dp = [False for _ in range(len(s) + 1)]
+        # set last element to True
+        # this is because our subproblem is
+        # f(x) = whether we can make word break at the last index
+        # if we draw out the tree, we'll find that at this point we've
+        # already found the word break
+        dp[-1] = True
+        
+        # start from the end of the array
+        for i in range(len(s), -1, -1):
+            for word in wordDict:
+                length = len(word)
+                # 1. check if we would go out of bounds
+                # 2. check if this is a matching word
+                if i + length < len(dp) and s[i:i+length] == word:
+                    # see if our previous index had a matching word
+                    dp[i] = dp[i + length]
+                # if we've found our word, then we are done
+                if dp[i]:
+                    break
+        
+        return dp[0]
