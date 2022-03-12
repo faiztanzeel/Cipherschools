@@ -1,0 +1,6 @@
+class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        dp = {0}
+        for i in stones: dp.update({x+i for x in dp})
+        for x in reversed(range(sum(stones)//2 + 1)):
+            if x in dp: return sum(stones) - 2*x
