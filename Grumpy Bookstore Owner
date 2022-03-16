@@ -1,0 +1,26 @@
+class Solution:
+    def maxSatisfied(self, customers, grumpy, minutes: int) -> int:
+        p1=0
+        p2=minutes
+        maxy=0
+        ind=0
+        tmpCust=customers.copy()
+        for i in range(len(tmpCust)):
+            if grumpy[i]==0:#Owner is not Grumpy so convert the val to 0
+                tmpCust[i]=0
+        while p2<=len(customers):
+            s=sum(tmpCust[p1:p2])
+            if s>maxy:
+                maxy=s
+                ind=p1
+            p1+=1
+            p2+=1
+        j=ind
+        while j<ind+minutes:
+            grumpy[j]=0
+            j+=1
+        s=0
+        for i in range(len(customers)):
+            if grumpy[i]==0:
+                s+=customers[i]
+        return s
