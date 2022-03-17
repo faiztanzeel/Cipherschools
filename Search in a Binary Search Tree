@@ -1,0 +1,8 @@
+class Solution(object):
+	def searchBST(self, root, val):
+		if root and root.val==val:
+			return root
+		else:
+			if root:
+				return self.searchBST(root.left,val) or self.searchBST(root.right,val)
+		return None
