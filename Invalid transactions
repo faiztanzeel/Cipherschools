@@ -1,0 +1,22 @@
+class Solution:
+    def invalidTransactions(self, transactions: List[str]) -> List[str]:
+        bools,size,splitted = [], len(transactions), [a.split(",") for a in transactions]
+        
+        for number in range(size):
+            name,city,money,time = splitted[number][0],splitted[number][3],splitted[number][2],splitted[number][1]
+            if int(money)>1000:
+                print(number,"False") 
+                bools.append(False)
+                continue
+            for number2 in range(size):      
+                name2,city2,time2 = splitted[number2][0],splitted[number2][3],splitted[number2][1]
+                if name==name2 and city != city2 and abs(int(time)-int(time2))<=60: 
+                    print(number,number2,"False") 
+                    bools.append(False)
+                    break
+                if (number!=number2 or number ==size-1) and number2 == size-1: 
+                  print(number,number2,"True")  
+                  bools.append(True)    
+        print(bools,transactions)        
+        x = [transactions[a] for a in range(size) if bools[a] == False]              
+        return x
