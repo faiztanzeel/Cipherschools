@@ -1,0 +1,20 @@
+class Solution:
+    def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        def pathtrack(node,path,ans,graph,l):
+            if node == [] or path[-1] == l-1:
+                if path[-1] != l-1:
+                    path.pop(-1)
+                    return
+                ans.append(path)
+                path = [0]
+                return
+            
+            for i in node:
+                nextnode = i
+                pathtrack(graph[i],path+[i],ans,graph,l)
+        
+        ans = []
+        path = [0]
+        l = len(graph)
+        pathtrack(graph[0],path,ans,graph,l)
+        return ans
