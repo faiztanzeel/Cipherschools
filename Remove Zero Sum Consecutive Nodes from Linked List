@@ -1,0 +1,17 @@
+class Solution:
+    def removeZeroSumSublists(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0) # we can't use anyother no. as all the starting number sum up to the -ve value of one take ex.1 
+        dummy.next = head
+        sum_ = 0
+        dict_ = {sum_:dummy}
+        while head:
+            sum_ += head.val
+            dict_[sum_] = head # this will update node value of prefix
+            head = head.next        
+        head = dummy
+        sum_ = 0
+        while head:
+            sum_ += head.val
+            head.next = dict_[sum_].next
+            head = head.next
+        return dummy.next
