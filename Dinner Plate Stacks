@@ -1,0 +1,46 @@
+from sortedcontainers import SortedList
+class DinnerPlates:
+
+    def __init__(self, capacity: int):
+        self.capacity = capacity
+        self.infiniteStacks = {}
+        
+        self.current_stack = -1
+        self.capacityStack = SortedList()
+
+    def push(self, val: int) -> None:
+        if self.capacityStack:
+            to_be_pushed = self.capacityStack[0]
+            self.infiniteStacks[to_be_pushed][0].append(val)
+            self.infiniteStacks[to_be_pushed][1] += 1
+            
+            if self.infiniteStacks[to_be_pushed][1] == self.capacity:
+                self.capacityStack.discard(to_be_pushed)
+        else:
+            self.current_stack += 1
+            self.infiniteStacks[self.current_stack] = [[val], 1]
+            
+            if self.capacity > 1:
+                self.capacityStack.add(self.current_stack)
+
+    def pop(self) -> int:
+        if self.current_stack == -1:
+            return -1
+        return self.popAtStack(self.current_stack)
+
+    def popAtStack(self, index: int) -> int:
+        if not self.infiniteStacks or index > self.current_stack or not self.infiniteStacks[index][1]:
+            return -1
+        
+        to_be_returned = self.infiniteStacks[index][0].pop(-1)
+        self.infiniteStacks[index][1] -= 1
+        
+        if index == self.current_stack:
+            while self.current_stack != -1 and not self.infiniteStacks[self.current_stack][1]:
+                self.current_stack -= 1
+                index -= 1
+        
+        if index != - 1 and self.infiniteStacks[index][1] == self.capacity - 1:
+            self.capacityStack.add(index)
+            
+        return to_be_returned
