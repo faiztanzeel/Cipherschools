@@ -1,0 +1,10 @@
+class Solution:
+    def numberOfArrays(self, differences: List[int], lower: int, upper: int) -> int:
+        max_delta, min_delta = 0, 0
+        running_sum = 0
+        for diff in differences: 
+            running_sum = running_sum + diff
+            max_delta, min_delta = max(max_delta, running_sum), min(min_delta, running_sum)
+        delta = max_delta - min_delta
+        gamma = upper - lower 
+        return max(0, gamma - delta + 1)
