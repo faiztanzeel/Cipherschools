@@ -1,0 +1,23 @@
+class Solution:
+    def canThreePartsEqualSum(self, arr: List[int]) -> bool:
+        n = sum(arr) / 3
+        if int(n) != n:
+            return False
+        n = int(n)
+        
+        i = 0
+        for _ in range(3):
+            a = 0
+            
+            if i >= len(arr):
+                return False
+            
+            for j in range(i, len(arr)):
+                a += arr[j]
+                if a == n:
+                    break
+            if a != n:
+                return False
+            i = j + 1
+
+        return True
