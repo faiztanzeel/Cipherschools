@@ -1,0 +1,19 @@
+class Solution:
+    def suggestedProducts(self, products: List[str], searchWord: str) -> List[List[str]]:
+        products.sort()
+
+        begin = 0
+        end = len(products) - 1
+        max_returns_cnt = 3
+
+        res = []
+        for i in range(len(searchWord)):
+            while begin <= end and (i > len(products[begin]) - 1 or searchWord[i] != products[begin][i]):
+                begin += 1
+            
+            while begin <= end and (i > len(products[end]) - 1 or searchWord[i] != products[end][i]):
+                end -= 1
+            
+            res.append(products[begin:min(begin + max_returns_cnt, end + 1)])
+        
+        return res
