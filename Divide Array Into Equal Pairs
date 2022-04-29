@@ -1,0 +1,9 @@
+class Solution:
+    def divideArray(self, nums: List[int]) -> bool:
+        dict={}
+        for i in nums:
+            dict[i]=dict.get(i,0)+1
+        for i in dict:
+            if dict[i]%2!=0:
+                return False
+        return True
