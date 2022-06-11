@@ -1,0 +1,25 @@
+class Solution:
+    def digArtifacts(self, n: int, artifacts: List[List[int]], dig: List[List[int]]) -> int:
+
+        grid = [[0 for _ in range(n)] for _ in range(n)]
+        
+        for d in dig:
+            grid[d[0]][d[1]] = 1
+            
+        # print(grid)
+        
+        res = [0]
+        
+        def findArtifactCells(artifact, res):
+            x1, y1, x2, y2 = artifact[0], artifact[1], artifact[2], artifact[3]
+            
+            for i in range(x1, x2+1):
+                for j in range(y1, y2+1):
+                    if grid[i][j] == 0:
+                        return
+            res[0] += 1
+            
+        for artifact in artifacts:
+            findArtifactCells(artifact, res)
+            
+        return res[0]
