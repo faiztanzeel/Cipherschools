@@ -1,0 +1,21 @@
+class Solution:
+    def minNumberOfFrogs(self, croakOfFrogs: str) -> int:
+        freq = {"c": 0, "r": 0, "o": 0, "a": 0}
+        max_frogs = 0
+        if croakOfFrogs[-1] == "k":
+            for x in croakOfFrogs[:-1]:
+                if x != "k":
+                    if freq["c"] >= freq["r"] >= freq["o"] >= freq["a"]:
+                        freq[x] += 1
+                    else:
+                        return -1
+                else:
+                    for y in "croa":
+                        if freq[y] > 0:
+                            max_frogs = max(max_frogs, freq[y])
+                            freq[y] -= 1
+                        else:
+                            return -1
+            if all(n == 1 for n in freq.values()):
+                return max_frogs
+        return -1
