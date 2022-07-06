@@ -1,0 +1,12 @@
+class Solution:
+    def countHomogenous(self, s: str) -> int:
+        ans = count = 0
+        x = ' '
+        for c in s:
+            if c != x:
+                count = 1
+                x = c
+            else:
+                count += 1
+            ans += count
+        return ans % ((10**9)+7)
