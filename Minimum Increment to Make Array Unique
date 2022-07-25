@@ -1,0 +1,11 @@
+class Solution:
+    def minIncrementForUnique(self, nums: List[int]) -> int:
+        nums.sort()
+        ans = 0; shouldBeAtLeast = nums[0] + 1
+        for i in range(1,len(nums)):
+            if nums[i]>=shouldBeAtLeast:
+                shouldBeAtLeast = nums[i] + 1 
+            else:
+                ans += shouldBeAtLeast - nums[i]
+                shouldBeAtLeast += 1 
+        return ans
