@@ -1,0 +1,12 @@
+class Solution:
+    def shortestToChar(self, s: str, c: str) -> List[int]:
+        res=[]
+        indices=[i for i, x in enumerate(s) if x == c]
+        print(indices)
+        for i in range(len(s)):
+            minIndex=99999
+            if s[i]==c:
+                res.append(0)
+            else:
+                res.append(min(abs(i-index) for index in indices))
+        return res
