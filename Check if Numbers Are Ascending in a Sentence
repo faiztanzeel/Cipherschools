@@ -1,0 +1,19 @@
+class Solution:
+    def areNumbersAscending(self, s: str) -> bool:
+        s = s.split()
+        temp = []
+        
+        for i in range(len(s)):
+            if s[i].isdigit():
+                con = int(s[i])
+                temp.append(con)
+                
+        count = 0
+        for j in range(len(temp)):
+            if count >= temp[j]:
+                return False
+            else:
+                count = temp[j]
+        
+        
+        return True
