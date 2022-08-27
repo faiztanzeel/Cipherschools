@@ -1,0 +1,21 @@
+class Solution:
+    def numTeams(self, rating: List[int]) -> int:
+        bitmsk = 0
+        def add(v):
+            nonlocal bitmsk
+            bitmsk |= 1<<v
+            return (bitmsk & ((1<<v)- 1)).bit_count()
+
+        for i, (_, p) in enumerate(sorted(zip(rating, count()))):
+            rating[p] = i
+        l_min = [add(v) for v in rating]
+        bitmsk = 0
+        r_min = [add(v) for v in rating[::-1]][::-1]
+
+        res = 0
+        cnt = len(rating)
+        for l in range(cnt):
+            r = cnt - l - 1
+            res += l_min[l] * (r - r_min[l])
+            res += (l - l_min[l]) * r_min[l]
+        return res
