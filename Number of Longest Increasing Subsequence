@@ -1,0 +1,30 @@
+from collections import defaultdict
+class Solution:
+    def findNumberOfLIS(self, nums: List[int]) -> int:
+        dp = [(1, 1)] * len(nums)
+        # track (max_count, items_with_max_count) at each index
+        for i in range(len(nums)):
+            for j in range(i):
+                if nums[i] > nums[j]:
+                    tot, count = dp[i]
+                    j_tot, j_count = dp[j]
+                    if j_tot + 1 == tot:
+                        count = count + j_count
+                    elif j_tot + 1 > tot:
+                        tot = j_tot + 1
+                        count = j_count
+                    dp[i] = (tot, count)
+        # find sum of lengths with max index
+        high = -1
+        high_count = 0
+        for tot, count in dp:
+            if tot == high:
+                high_count += count
+            elif tot > high:
+                high = tot
+                high_count = count
+        # print(high, high_count)
+        # print(dp)
+        if high == 1:
+            return len(nums)
+        return high_count
