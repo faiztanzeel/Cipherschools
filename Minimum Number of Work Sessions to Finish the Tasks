@@ -1,0 +1,20 @@
+class Solution:
+    def minSessions(self, tasks: List[int], sessionTime: int) -> int:
+        if not tasks:
+            return 0
+        n = len(tasks)
+        @lru_cache(None)
+        def dp(mask, s):
+            if mask == (1 << n) - 1:
+                return 0
+            else:
+                result = float('inf')
+                flag = True
+                for i in range(0, n):
+                    if (mask >> i) % 2 == 0 and s >= tasks[i]:
+                        result = min(result, dp(mask | 2**i, s-tasks[i]))
+                        flag = False
+                if flag:
+                    return 1 + dp(mask, sessionTime)
+                return result
+        return dp(0, sessionTime) + 1
