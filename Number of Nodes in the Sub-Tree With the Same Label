@@ -1,0 +1,35 @@
+class Solution(object):
+    r = []
+    def trv(self, node, adj, labels, vis):
+        rei = [0] * 27
+        if node in vis:
+            return rei
+        char = ord(labels[node]) - ord('a')
+        vis[node] = 1
+        for nei in adj[node]:
+            if nei not in vis:
+                w=self.trv(nei, adj, labels, vis)
+                for i in range(27):
+                    rei[i]+=w[i]
+        rei[char]+=1
+        self.r[node] = rei[char]
+        return rei
+                
+            
+        
+    def countSubTrees(self, n, edges, labels):
+        """
+        :type n: int
+        :type edges: List[List[int]]
+        :type labels: str
+        :rtype: List[int]
+        """
+        alpha = [0] * 27
+        self.r = [0] * n
+        adj = [[] for _ in range(n)]
+        vis = {}
+        for ed in edges:
+            adj[ed[0]].append(ed[1])
+            adj[ed[1]].append(ed[0])
+        self.trv(0, adj, labels, vis)
+        return self.r
