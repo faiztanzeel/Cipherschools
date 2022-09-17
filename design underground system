@@ -1,0 +1,24 @@
+class UndergroundSystem:
+    def __init__(self):
+        self.checked_in: Dict[int, Tuple[str, int]] = {}
+        self.routes: Dict[str, Tuple[int, int]] = {}
+        
+
+    def checkIn(self, ID: int, stationName: str, t: int) -> None:
+        self.checked_in[ID] = (stationName, t)
+        
+
+    def checkOut(self, ID: int, stationName: str, t: int) -> None:
+        startStation, ts = self.checked_in[ID]
+        del self.checked_in[ID]
+        route = startStation + "->" + stationName
+        time = t - ts
+        
+        n_clients, total_time = self.routes.get(route, (0,0))
+        self.routes[route] = (n_clients + 1, total_time + time)
+        
+
+    def getAverageTime(self, startStation: str, endStation: str) -> float:
+        route = startStation + "->" + endStation
+        n_clients, total_time = self.routes[route]
+        return total_time / n_clients
