@@ -1,0 +1,28 @@
+class Solution:
+    def btreeGameWinningMove(self, root: Optional[TreeNode], n: int, x: int) -> bool:
+        
+        # Do DFS on 3 direction of opponent
+        # if one side is greater than the other 2 direction, you win!
+        
+        opponent = None
+        
+        def DFS(root):
+            if not root:
+                return 0
+            
+            nonlocal x
+            if root.val == x:
+                nonlocal opponent
+                opponent = root
+                return 0
+            
+            return 1 + DFS(root.left) + DFS(root.right)
+        
+        above = DFS(root)
+        left = DFS(opponent.left)
+        right = DFS(opponent.right)
+        
+        if (above > left + right) or (left > above + right) or (right > above + left):
+            return True
+        
+        return False
