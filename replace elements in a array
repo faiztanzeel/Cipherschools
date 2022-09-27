@@ -1,0 +1,7 @@
+class Solution:
+    def arrayChange(self, nums: List[int], operations: List[List[int]]) -> List[int]:
+        hashMap = {val: idx for idx, val in enumerate(nums)}
+        for numInArray, replacementNum in operations:
+            idx = hashMap[numInArray]
+            nums[idx], hashMap[replacementNum] = replacementNum, idx
+        return nums
