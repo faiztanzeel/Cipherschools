@@ -1,0 +1,12 @@
+class Solution:
+    def sumOfNumberAndReverse(self, num: int) -> bool:
+        
+        if num < 11: return not num%2
+        
+        m = [0,5,1,6,2,7,3,8,4]
+
+        for i in range(m[num%9],num,9)[::-1]:
+            if i + int(str(i)[::-1]) == num:
+                return True
+            
+        return False
